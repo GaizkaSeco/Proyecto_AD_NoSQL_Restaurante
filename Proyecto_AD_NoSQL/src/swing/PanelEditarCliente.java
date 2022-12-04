@@ -11,12 +11,13 @@ import javax.swing.JPanel;
  *
  * @author omega
  */
-public class PanelAnadirCliente extends javax.swing.JPanel {
+public class PanelEditarCliente extends javax.swing.JPanel {
     JPanel content;
+    
     /**
-     * Creates new form PanelAnadirCliente
+     * Creates new form PanelEditarCliente
      */
-    public PanelAnadirCliente(JPanel content) {
+    public PanelEditarCliente(JPanel content) {
         initComponents();
         this.content = content;
     }
@@ -43,7 +44,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         botonAnadir = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cancelarBoton1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,7 +52,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVO CLIENTE");
+        jLabel1.setText("EDITAR CLIENTE");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 830, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -86,9 +87,10 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
 
+        jLabel6.setBackground(new java.awt.Color(57, 57, 58));
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Añadir Cliente");
+        jLabel6.setText("Editar Cliente");
 
         javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
         botonAnadir.setLayout(botonAnadirLayout);
@@ -110,19 +112,19 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(219, 219, 219));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Cancelar");
+        jLabel9.setForeground(new java.awt.Color(219, 219, 219));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Cancelar");
 
         javax.swing.GroupLayout cancelarBoton1Layout = new javax.swing.GroupLayout(cancelarBoton1);
         cancelarBoton1.setLayout(cancelarBoton1Layout);
         cancelarBoton1Layout.setHorizontalGroup(
             cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         cancelarBoton1Layout.setVerticalGroup(
             cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         add(cancelarBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
@@ -148,7 +150,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

@@ -11,12 +11,12 @@ import javax.swing.JPanel;
  *
  * @author omega
  */
-public class PanelAnadirEmpleado extends javax.swing.JPanel {
+public class PanelEditarEmpleado extends javax.swing.JPanel {
     JPanel content;
     /**
-     * Creates new form PanelAnadirEmpleado
+     * Creates new form PanelEditarEmpleado
      */
-    public PanelAnadirEmpleado(JPanel content) {
+    public PanelEditarEmpleado(JPanel content) {
         initComponents();
         this.content = content;
     }
@@ -48,16 +48,18 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
-        cancelarBoton = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        cancelarBoton2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        setMinimumSize(new java.awt.Dimension(830, 550));
+        setPreferredSize(new java.awt.Dimension(830, 550));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVO EMPLEADO");
+        jLabel1.setText("EDITAR EMPLEADO");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -94,7 +96,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Añadir Empleado");
+        jLabel6.setText("Editar Empleado");
 
         javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
         botonAnadir.setLayout(botonAnadirLayout);
@@ -129,32 +131,32 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 300, 20));
         add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 300, -1));
 
-        cancelarBoton.setBackground(new java.awt.Color(57, 57, 58));
-        cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelarBoton2.setBackground(new java.awt.Color(57, 57, 58));
+        cancelarBoton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cancelarBotonMousePressed(evt);
+                cancelarBoton2MousePressed(evt);
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(219, 219, 219));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Cancelar");
+        jLabel10.setForeground(new java.awt.Color(219, 219, 219));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Cancelar");
 
-        javax.swing.GroupLayout cancelarBotonLayout = new javax.swing.GroupLayout(cancelarBoton);
-        cancelarBoton.setLayout(cancelarBotonLayout);
-        cancelarBotonLayout.setHorizontalGroup(
-            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        javax.swing.GroupLayout cancelarBoton2Layout = new javax.swing.GroupLayout(cancelarBoton2);
+        cancelarBoton2.setLayout(cancelarBoton2Layout);
+        cancelarBoton2Layout.setHorizontalGroup(
+            cancelarBoton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        cancelarBotonLayout.setVerticalGroup(
-            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        cancelarBoton2Layout.setVerticalGroup(
+            cancelarBoton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
+        add(cancelarBoton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+    private void cancelarBoton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton2MousePressed
         PanelEmpleados frame = new PanelEmpleados(content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -162,15 +164,18 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }//GEN-LAST:event_cancelarBotonMousePressed
+    }//GEN-LAST:event_cancelarBoton2MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonAnadir;
     private javax.swing.JPanel cancelarBoton;
+    private javax.swing.JPanel cancelarBoton1;
+    private javax.swing.JPanel cancelarBoton2;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fechaField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -178,6 +183,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

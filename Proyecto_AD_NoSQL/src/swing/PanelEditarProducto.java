@@ -7,16 +7,17 @@ package swing;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author omega
  */
-public class PanelAnadirCliente extends javax.swing.JPanel {
+public class PanelEditarProducto extends javax.swing.JPanel {
     JPanel content;
     /**
-     * Creates new form PanelAnadirCliente
+     * Creates new form PanelEditarProducto
      */
-    public PanelAnadirCliente(JPanel content) {
+    public PanelEditarProducto(JPanel content) {
         initComponents();
         this.content = content;
     }
@@ -35,14 +36,11 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         nombreField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        telefonoField = new javax.swing.JTextField();
+        salarioField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         botonAnadir = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        cancelarBoton1 = new javax.swing.JPanel();
+        cancelarBoton = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -51,44 +49,34 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVO CLIENTE");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 830, -1));
+        jLabel1.setText("EDITAR PRODUCTO");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, -1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Nombre:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 260, 20));
+        jLabel2.setText("Producto:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 260, 20));
 
         nombreField.setBackground(new java.awt.Color(204, 204, 204));
         nombreField.setBorder(null);
-        add(nombreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 300, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 300, -1));
+        add(nombreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 300, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 300, -1));
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Telefono:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 260, 20));
+        jLabel3.setText("Cantidad:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 260, 20));
 
-        telefonoField.setBackground(new java.awt.Color(204, 204, 204));
-        telefonoField.setBorder(null);
-        add(telefonoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 300, 20));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 300, -1));
-
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Email:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 260, 20));
-
-        emailField.setBackground(new java.awt.Color(204, 204, 204));
-        emailField.setBorder(null);
-        add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 300, 20));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 300, -1));
+        salarioField.setBackground(new java.awt.Color(204, 204, 204));
+        salarioField.setBorder(null);
+        add(salarioField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 300, 20));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 300, -1));
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Añadir Cliente");
+        jLabel6.setText("Editar Producto");
 
         javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
         botonAnadir.setLayout(botonAnadirLayout);
@@ -101,12 +89,12 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
+        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 160, 50));
 
-        cancelarBoton1.setBackground(new java.awt.Color(57, 57, 58));
-        cancelarBoton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cancelarBoton1MousePressed(evt);
+                cancelarBotonMousePressed(evt);
             }
         });
 
@@ -114,45 +102,42 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Cancelar");
 
-        javax.swing.GroupLayout cancelarBoton1Layout = new javax.swing.GroupLayout(cancelarBoton1);
-        cancelarBoton1.setLayout(cancelarBoton1Layout);
-        cancelarBoton1Layout.setHorizontalGroup(
-            cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout cancelarBotonLayout = new javax.swing.GroupLayout(cancelarBoton);
+        cancelarBoton.setLayout(cancelarBotonLayout);
+        cancelarBotonLayout.setHorizontalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        cancelarBoton1Layout.setVerticalGroup(
-            cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cancelarBotonLayout.setVerticalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(cancelarBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
+        add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 160, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarBoton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton1MousePressed
-        PanelClientes frame = new PanelClientes(content);
+    private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        PanelAlmacen frame = new PanelAlmacen(content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }//GEN-LAST:event_cancelarBoton1MousePressed
+    }//GEN-LAST:event_cancelarBotonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonAnadir;
-    private javax.swing.JPanel cancelarBoton1;
-    private javax.swing.JTextField emailField;
+    private javax.swing.JPanel cancelarBoton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField nombreField;
-    private javax.swing.JTextField telefonoField;
+    private javax.swing.JTextField salarioField;
     // End of variables declaration//GEN-END:variables
 }

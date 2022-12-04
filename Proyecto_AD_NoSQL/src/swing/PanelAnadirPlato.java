@@ -4,17 +4,21 @@
  */
 package swing;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author omega
  */
 public class PanelAnadirPlato extends javax.swing.JPanel {
-
+    JPanel content;
     /**
      * Creates new form PanelAnadirPlato
      */
-    public PanelAnadirPlato() {
+    public PanelAnadirPlato(JPanel content) {
         initComponents();
+        this.content = content;
     }
 
     /**
@@ -26,19 +30,141 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        platoField = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        descripcionField = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        costeField = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        botonAnadir = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        cancelarBoton = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 204, 204));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("NUEVO PLATO");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 830, -1));
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Plato:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 260, 20));
+
+        platoField.setBackground(new java.awt.Color(204, 204, 204));
+        platoField.setBorder(null);
+        add(platoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 300, 20));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 300, -1));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Descripcion: ");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 260, 20));
+
+        descripcionField.setBackground(new java.awt.Color(204, 204, 204));
+        descripcionField.setBorder(null);
+        add(descripcionField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 300, 20));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 300, -1));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Coste:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 260, 20));
+
+        costeField.setBackground(new java.awt.Color(204, 204, 204));
+        costeField.setBorder(null);
+        add(costeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 300, 20));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 300, -1));
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Categoria:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 330, 260, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 310, -1));
+
+        botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+
+        jLabel6.setForeground(new java.awt.Color(219, 219, 219));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Añadir Plato");
+
+        javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
+        botonAnadir.setLayout(botonAnadirLayout);
+        botonAnadirLayout.setHorizontalGroup(
+            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        botonAnadirLayout.setVerticalGroup(
+            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
+
+        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
+
+        cancelarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cancelarBotonMousePressed(evt);
+            }
+        });
+
+        jLabel7.setForeground(new java.awt.Color(219, 219, 219));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Cancelar");
+
+        javax.swing.GroupLayout cancelarBotonLayout = new javax.swing.GroupLayout(cancelarBoton);
+        cancelarBoton.setLayout(cancelarBotonLayout);
+        cancelarBotonLayout.setHorizontalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
+        cancelarBotonLayout.setVerticalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        PanelPlatos frame = new PanelPlatos(content);
+        frame.setSize(830,550);
+        frame.setLocation(0,0);
+        content.removeAll();
+        content.add(frame, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_cancelarBotonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel botonAnadir;
+    private javax.swing.JPanel cancelarBoton;
+    private javax.swing.JTextField costeField;
+    private javax.swing.JTextField descripcionField;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField platoField;
     // End of variables declaration//GEN-END:variables
 }

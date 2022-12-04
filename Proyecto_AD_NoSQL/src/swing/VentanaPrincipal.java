@@ -18,7 +18,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         
-        PanelPlatos frame = new PanelPlatos();
+        PanelPlatos frame = new PanelPlatos(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         
@@ -369,7 +369,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
         
-        PanelPlatos frame = new PanelPlatos();
+        PanelPlatos frame = new PanelPlatos(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -386,7 +386,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
         
-        PanelEmpleados frame = new PanelEmpleados();
+        PanelEmpleados frame = new PanelEmpleados(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -431,7 +431,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonClientes, bordeProyectos, labelProyectos);        
         
-        PanelAlmacen frame = new PanelAlmacen();
+        PanelAlmacen frame = new PanelAlmacen(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -448,7 +448,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonSalir, bordeSalir, labelSalir);
         
-        PanelClientes frame = new PanelClientes();
+        PanelClientes frame = new PanelClientes(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
