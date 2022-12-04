@@ -75,6 +75,7 @@ public class PanelClientes extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         editarBoton = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,7 +93,7 @@ public class PanelClientes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 690, 540));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 66, 690, 480));
 
         anadirBoton.setBackground(new java.awt.Color(57, 57, 58));
         anadirBoton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,7 +118,7 @@ public class PanelClientes extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, 40));
+        add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, -1, 40));
 
         eliminarBoton.setBackground(new java.awt.Color(57, 57, 58));
 
@@ -139,7 +140,7 @@ public class PanelClientes extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, 40));
+        add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, -1, 40));
 
         editarBoton.setBackground(new java.awt.Color(57, 57, 58));
         editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,7 +164,13 @@ public class PanelClientes extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, -1, 40));
+        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, -1, 40));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("GESTION DE LOS CLIENTES");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 830, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
@@ -194,6 +201,7 @@ public class PanelClientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table1;
     // End of variables declaration//GEN-END:variables
