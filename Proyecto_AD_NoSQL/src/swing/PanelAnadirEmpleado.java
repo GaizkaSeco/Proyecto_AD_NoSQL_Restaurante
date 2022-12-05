@@ -4,21 +4,29 @@
  */
 package swing;
 
+import clases.ConexionExist;
+import clases.Empleado;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
 
 /**
- *
  * @author omega
  */
 public class PanelAnadirEmpleado extends javax.swing.JPanel {
     JPanel content;
+    List<Empleado> empleados;
+    ConexionExist conexion = new ConexionExist();
+
     /**
      * Creates new form PanelAnadirEmpleado
      */
-    public PanelAnadirEmpleado(JPanel content) {
+    public PanelAnadirEmpleado(JPanel content, List<Empleado> empleados) {
         initComponents();
         this.content = content;
+        this.empleados = empleados;
     }
 
     /**
@@ -91,6 +99,11 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 300, -1));
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        botonAnadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAnadirMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,12 +112,12 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
         botonAnadir.setLayout(botonAnadirLayout);
         botonAnadirLayout.setHorizontalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         botonAnadirLayout.setVerticalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
@@ -143,12 +156,12 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
         javax.swing.GroupLayout cancelarBotonLayout = new javax.swing.GroupLayout(cancelarBoton);
         cancelarBoton.setLayout(cancelarBotonLayout);
         cancelarBotonLayout.setHorizontalGroup(
-            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         cancelarBotonLayout.setVerticalGroup(
-            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
@@ -156,13 +169,36 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
         PanelEmpleados frame = new PanelEmpleados(content);
-        frame.setSize(830,550);
-        frame.setLocation(0,0);
+        frame.setSize(830, 550);
+        frame.setLocation(0, 0);
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_cancelarBotonMousePressed
+
+    private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        try {
+            double salario = Double.parseDouble(salarioField.getText());
+            int telefono = Integer.parseInt(telefonoField.getText());
+            if (nombreField.getText().isBlank() || fechaField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                int id;
+                empleados.clear();
+                empleados = conexion.cargarEmpleados();
+                if (empleados.size() == 0) {
+                    id = 1;
+                } else {
+                    id = empleados.get(empleados.size() - 1).getId() + 1;
+                }
+                Empleado empNuevo = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
+                conexion.anadirEmpleado(empNuevo);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+        }
+    }//GEN-LAST:event_botonAnadirMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

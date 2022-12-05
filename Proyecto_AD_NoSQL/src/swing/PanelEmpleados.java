@@ -7,12 +7,29 @@ package swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.io.IOException;
+import java.io.StringReader;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import clases.ConexionExist;
+import clases.Empleado;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.xmldb.api.DatabaseManager;
+import org.xmldb.api.base.*;
+import org.xmldb.api.modules.XPathQueryService;
 import scrollbar.ScrollBarCustom;
 import table.TableHeader;
 
@@ -22,14 +39,16 @@ import table.TableHeader;
  */
 public class PanelEmpleados extends javax.swing.JPanel {
     JPanel content;
+    List<Empleado> empleados = new ArrayList<Empleado>();
+    String[] nombreColumnas = {"id", "Nombre", "Salario", "Fecha Contrato", "Telefono", "Email"};
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelEmpleados
      */
     public PanelEmpleados(JPanel content) {
         initComponents();
         this.content = content;
-        
-        String[] nombreColumnas = {"id", "Nombre", "Salario", "Fecha Contrato", "Telefono", "Email"};
+
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
         table1.setRowHeight(30);
@@ -47,6 +66,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fixtable(jScrollPane1);
+        modificarTabla();
     }
     
     public void fixtable(JScrollPane scroll) {
@@ -55,6 +75,28 @@ public class PanelEmpleados extends javax.swing.JPanel {
         JPanel p = new JPanel();
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
+    }
+
+    public void cargarDatos() {
+        empleados.clear();
+        empleados = conexion.cargarEmpleados();
+    }
+
+    public void modificarTabla() {
+        cargarDatos();
+        //Nombre de las columnas y cargamos los datos al array que se le van a enviar al la tabla para cargar los datos
+        int cantidad = empleados.size();
+        String[][] d = new String[cantidad][6];
+        for (int i = 0; i < empleados.size(); i++) {
+            d[i][0] = String.valueOf(empleados.get(i).getId());
+            d[i][1] = String.valueOf(empleados.get(i).getNombre());
+            d[i][2] = String.valueOf(empleados.get(i).getSalario());
+            d[i][3] = String.valueOf(empleados.get(i).getFechaCon());
+            d[i][4] = String.valueOf(empleados.get(i).getTelefono());
+            d[i][5] = String.valueOf(empleados.get(i).getEmail());
+        }
+        //se carga el modelo de la tabla
+        table1.setModel(new DefaultTableModel(d, nombreColumnas));
     }
 
     /**
@@ -178,7 +220,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
-        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content);
+        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content, empleados);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
