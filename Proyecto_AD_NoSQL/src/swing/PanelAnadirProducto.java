@@ -4,8 +4,14 @@
  */
 package swing;
 
+import clases.ConexionExist;
+import clases.Empleado;
+import clases.Producto;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -13,6 +19,9 @@ import javax.swing.JPanel;
  */
 public class PanelAnadirProducto extends javax.swing.JPanel {
     JPanel content;
+    List<Producto> productos = new ArrayList<>();
+    ConexionExist conexion = new ConexionExist();
+
     /**
      * Creates new form PanelAnadirProducto
      */
@@ -32,10 +41,10 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        nombreField = new javax.swing.JTextField();
+        productoField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        salarioField = new javax.swing.JTextField();
+        cantidadField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         botonAnadir = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,9 +65,9 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
         jLabel2.setText("Producto:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 260, 20));
 
-        nombreField.setBackground(new java.awt.Color(204, 204, 204));
-        nombreField.setBorder(null);
-        add(nombreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 300, 20));
+        productoField.setBackground(new java.awt.Color(204, 204, 204));
+        productoField.setBorder(null);
+        add(productoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 300, 20));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 300, -1));
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -66,12 +75,17 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
         jLabel3.setText("Cantidad:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 260, 20));
 
-        salarioField.setBackground(new java.awt.Color(204, 204, 204));
-        salarioField.setBorder(null);
-        add(salarioField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 300, 20));
+        cantidadField.setBackground(new java.awt.Color(204, 204, 204));
+        cantidadField.setBorder(null);
+        add(cantidadField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 300, 20));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 300, -1));
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        botonAnadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAnadirMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -125,10 +139,40 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
         content.repaint();
     }//GEN-LAST:event_cancelarBotonMousePressed
 
+    private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        try {
+            int cantidad = Integer.parseInt(cantidadField.getText());
+            if (productoField.getText().isBlank()){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                int id;
+                productos = conexion.cargarProductos();
+                if (productos.size() == 0) {
+                    id = 1;
+                } else {
+                    id = productos.get(productos.size() - 1).getId() + 1;
+                }
+                Producto proNuevo = new Producto(id, productoField.getText(), cantidad);
+                conexion.anadirProducto(proNuevo);
+                JOptionPane.showMessageDialog(null, "El producto se ha añadido corectamente.");
+                PanelAlmacen frame = new PanelAlmacen(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La cantidad tiene que ser un valor numerico.");
+        }
+    }//GEN-LAST:event_botonAnadirMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonAnadir;
     private javax.swing.JPanel cancelarBoton;
+    private javax.swing.JTextField cantidadField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -136,7 +180,6 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField nombreField;
-    private javax.swing.JTextField salarioField;
+    private javax.swing.JTextField productoField;
     // End of variables declaration//GEN-END:variables
 }

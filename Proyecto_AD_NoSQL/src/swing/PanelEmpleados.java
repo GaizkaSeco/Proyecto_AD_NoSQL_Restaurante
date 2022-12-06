@@ -220,7 +220,8 @@ public class PanelEmpleados extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
-        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content, empleados);
+        cargarDatos();
+        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();

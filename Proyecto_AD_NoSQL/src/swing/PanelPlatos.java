@@ -7,12 +7,18 @@ package swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import clases.ConexionExist;
+import clases.Plato;
 import table.TableHeader;
 import scrollbar.ScrollBarCustom;
 
@@ -21,15 +27,17 @@ import scrollbar.ScrollBarCustom;
  * @author omega
  */
 public class PanelPlatos extends javax.swing.JPanel {
+    String[] nombreColumnas = {"id", "Plato", "Descripcion", "Coste", "Categoria"};
     JPanel content;
+    List<Plato> platos = new ArrayList<>();
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelPlatos
      */
     public PanelPlatos(JPanel content) {
         initComponents();
         this.content = content;
-        
-        String[] nombreColumnas = {"id", "Plato", "Descripcion", "Coste", "Categoria"};
+
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
         table1.setRowHeight(30);
@@ -47,6 +55,7 @@ public class PanelPlatos extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fixtable(jScrollPane1);
+        modificarTabla();
     }
     
      public void fixtable(JScrollPane scroll) {
@@ -55,6 +64,27 @@ public class PanelPlatos extends javax.swing.JPanel {
         JPanel p = new JPanel();
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
+    }
+
+    public void cargarDatos() {
+        platos.clear();
+        platos = conexion.cargarPlatos();
+    }
+
+    public void modificarTabla() {
+        cargarDatos();
+        //Nombre de las columnas y cargamos los datos al array que se le van a enviar al la tabla para cargar los datos
+        int cantidad = platos.size();
+        String[][] d = new String[cantidad][5];
+        for (int i = 0; i < platos.size(); i++) {
+            d[i][0] = String.valueOf(platos.get(i).getId());
+            d[i][1] = String.valueOf(platos.get(i).getNombre());
+            d[i][2] = String.valueOf(platos.get(i).getDescripcion());
+            d[i][3] = String.valueOf(platos.get(i).getPrecio());
+            d[i][4] = String.valueOf(platos.get(i).getCategoria());
+        }
+        //se carga el modelo de la tabla
+        table1.setModel(new DefaultTableModel(d, nombreColumnas));
     }
 
     /**

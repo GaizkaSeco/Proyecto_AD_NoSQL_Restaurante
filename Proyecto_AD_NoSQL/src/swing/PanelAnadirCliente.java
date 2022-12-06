@@ -4,8 +4,13 @@
  */
 package swing;
 
+import clases.Cliente;
+import clases.ConexionExist;
+import clases.Empleado;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -13,6 +18,8 @@ import javax.swing.JPanel;
  */
 public class PanelAnadirCliente extends javax.swing.JPanel {
     JPanel content;
+    List<Cliente> clientes;
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelAnadirCliente
      */
@@ -85,6 +92,11 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 300, -1));
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        botonAnadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAnadirMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -137,6 +149,35 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_cancelarBoton1MousePressed
+
+    private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        try {
+            int telefono = Integer.parseInt(telefonoField.getText());
+            if (nombreField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                int id;
+                clientes = conexion.cargarClientes();
+                if (clientes.size() == 0) {
+                    id = 1;
+                } else {
+                    id = clientes.get(clientes.size() - 1).getId() + 1;
+                }
+                Cliente cliNuevo = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
+                conexion.anadirCliente(cliNuevo);
+                JOptionPane.showMessageDialog(null, "El cliente se ha añadido corectamente.");
+                PanelClientes frame = new PanelClientes(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+        }
+    }//GEN-LAST:event_botonAnadirMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,8 +4,14 @@
  */
 package swing;
 
+import clases.ConexionExist;
+import clases.Empleado;
+import clases.Plato;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -13,12 +19,17 @@ import javax.swing.JPanel;
  */
 public class PanelAnadirPlato extends javax.swing.JPanel {
     JPanel content;
+    List<Plato> platos = new ArrayList<>();
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelAnadirPlato
      */
     public PanelAnadirPlato(JPanel content) {
         initComponents();
         this.content = content;
+        jComboBox1.addItem("Primero");
+        jComboBox1.addItem("Segundo");
+        jComboBox1.addItem("Tercero");
     }
 
     /**
@@ -90,11 +101,14 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Categoria:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 330, 260, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 310, -1));
 
         botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        botonAnadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAnadirMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -147,6 +161,36 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_cancelarBotonMousePressed
+
+    private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        try {
+            double coste = Double.parseDouble(costeField.getText());
+            if (platoField.getText().isBlank() || descripcionField.getText().isBlank()){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                int id;
+                platos = conexion.cargarPlatos();
+                if (platos.size() == 0) {
+                    id = 1;
+                } else {
+                    id = platos.get(platos.size() - 1).getId() + 1;
+                }
+                int categoria = jComboBox1.getSelectedIndex() + 1;
+                Plato platoNuevo = new Plato(id, platoField.getText(),descripcionField.getText(), coste, categoria);
+                conexion.anadirPlato(platoNuevo);
+                JOptionPane.showMessageDialog(null, "El plato se ha añadido corectamente.");
+                PanelPlatos frame = new PanelPlatos(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+        }
+    }//GEN-LAST:event_botonAnadirMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package clases;
 
+import net.xqj.exist.bin.D;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -8,6 +9,7 @@ import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
@@ -31,21 +33,11 @@ public class ConexionExist {
             Collection col = DatabaseManager.getCollection(URI, usu, usuPwd);
             return col;
         } catch (XMLDBException e) {
-            System.out.println("Error al inicializar la BD eXist.");
-            //e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al inicializar la BD eXist.");
         } catch (ClassNotFoundException e) {
-            System.out.println("Error en el driver.");
-            //e.printStackTrace();
-        } catch (InstantiationException e) {
-            System.out.println("Error al instanciar la BD.");
-            //e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            System.out.println("Error al instanciar la BD.");
-            //e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error en el driver.");
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
         }
         return null;
     }
@@ -62,7 +54,7 @@ public class ConexionExist {
                 // recorrer los datos del recurso.
                 ResourceIterator i = result.getIterator();
                 if (!i.hasMoreResources()) {
-                    System.out.println(" LA CONSULTA NO DEVUELVE NADA O ESTÁ MAL ESCRITA");
+                    JOptionPane.showMessageDialog(null, "No hay empleados.");
                 }
                 while (i.hasMoreResources()) {
                     Resource r = i.nextResource();
@@ -75,17 +67,119 @@ public class ConexionExist {
                 }
                 col.close();
             } catch (XMLDBException e) {
-                System.out.println(" ERROR AL CONSULTAR DOCUMENTO.");
-                e.printStackTrace();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (JDOMException e) {
-                throw new RuntimeException(e);
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
             }
         } else {
-            System.out.println("Error en la conexión. Comprueba datos.");
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
         }
         return empleados;
+    }
+
+    public List<Cliente> cargarClientes() {
+        Collection col = conectar();
+        List<Cliente> clientes = new ArrayList<>();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $emp in /CLIENTES/CLIENTE return $emp");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "No hay clientes.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    Cliente cliente = new Cliente(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Integer.parseInt(root.getChildren("TELEFONO").get(0).getText()), root.getChildren("EMAIL").get(0).getText() );
+                    clientes.add(cliente);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return clientes;
+    }
+
+    public List<Producto> cargarProductos() {
+        Collection col = conectar();
+        List<Producto> productos = new ArrayList<>();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $emp in /ALMACEN/PRODUCTO return $emp");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "No hay productos en el almacen.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    Producto producto = new Producto(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("PRODUCTO").get(0).getText(), Integer.parseInt(root.getChildren("CANTIDAD").get(0).getText()));
+                    productos.add(producto);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return productos;
+    }
+
+    public List<Plato> cargarPlatos() {
+        Collection col = conectar();
+        List<Plato> platos = new ArrayList<>();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $plato in /PLATOS/PLATO return $plato");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "No hay platos existentes en la carta.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    Plato plato = new Plato(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), root.getChildren("DESCRIPCION").get(0).getText(), Double.parseDouble(root.getChildren("PRECIO").get(0).getText()), Integer.parseInt(root.getChildren("CATEGORIA").get(0).getText()));
+                    platos.add(plato);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return platos;
     }
 
     public void anadirEmpleado(Empleado empNuevo) {
@@ -107,11 +201,82 @@ public class ConexionExist {
                 //cerramos
                 col.close();
             } catch (XMLDBException e) {
-                System.out.println(" ERROR AL CONSULTAR DOCUMENTO.");
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "ERROR al consultar el documento.");
             }
         } else {
-            System.out.println("Error en la conexión. Comprueba datos.");
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+    }
+
+    public void anadirCliente(Cliente cliNuevo) {
+        Collection col = conectar();
+        String nuevocli = "<CLIENTE ID='" + cliNuevo.getId() + "'>" +
+                "<NOMBRE>" + cliNuevo.getNombre() + "</NOMBRE>" +
+                "<TELEFONO>" + cliNuevo.getTelefono() + "</TELEFONO>" +
+                "<EMAIL>" + cliNuevo.getEmail() + "</EMAIL>" +
+                "</CLIENTE>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("update insert " + nuevocli + " into /CLIENTES");
+                System.out.println(result);
+                //cerramos
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "ERROR al consultar el documento.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+    }
+
+    public void anadirProducto(Producto proNuevo) {
+        Collection col = conectar();
+        String nuevopro = "<PRODUCTO ID='" + proNuevo.getId() + "'>" +
+                "<PRODUCTO>" + proNuevo.getProducto() + "</PRODUCTO>" +
+                "<CANTIDAD>" + proNuevo.getCantidad() + "</CANTIDAD>" +
+                "</PRODUCTO>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("update insert " + nuevopro + " into /ALMACEN");
+                System.out.println(result);
+                //cerramos
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "ERROR al consultar el documento.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+    }
+
+    public void anadirPlato(Plato platoNuevo) {
+        Collection col = conectar();
+        String nuevocli = "<PLATO ID='" + platoNuevo.getId() + "'>" +
+                "<NOMBRE>" + platoNuevo.getNombre() + "</NOMBRE>" +
+                "<DESCRIPCION>" + platoNuevo.getDescripcion() + "</DESCRIPCION>" +
+                "<PRECIO>" + platoNuevo.getPrecio() + "</PRECIO>" +
+                "<CATEGORIA>" + platoNuevo.getCategoria() + "</CATEGORIA>" +
+                "</PLATO>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("update insert " + nuevocli + " into /PLATOS");
+                System.out.println(result);
+                //cerramos
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "ERROR al consultar el documento.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
         }
     }
 }

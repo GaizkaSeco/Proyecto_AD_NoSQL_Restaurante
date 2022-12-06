@@ -7,12 +7,18 @@ package swing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import clases.ConexionExist;
+import clases.Producto;
 import scrollbar.ScrollBarCustom;
 import table.TableHeader;
 
@@ -23,6 +29,8 @@ import table.TableHeader;
 public class PanelAlmacen extends javax.swing.JPanel {
     String[] nombreColumnas = {"id", "Nombre", "Cantidad"};
     JPanel content;
+    List<Producto> productos = new ArrayList<Producto>();
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelAlmacen
      */
@@ -47,6 +55,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fixtable(jScrollPane1);
+        modificarTabla();
     }
     
      public void fixtable(JScrollPane scroll) {
@@ -55,6 +64,25 @@ public class PanelAlmacen extends javax.swing.JPanel {
         JPanel p = new JPanel();
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         scroll.setBorder(new EmptyBorder(5, 10, 5, 10));
+    }
+
+    public void cargarDatos() {
+        productos.clear();
+        productos = conexion.cargarProductos();
+    }
+
+    public void modificarTabla() {
+        cargarDatos();
+        //Nombre de las columnas y cargamos los datos al array que se le van a enviar al la tabla para cargar los datos
+        int cantidad = productos.size();
+        String[][] d = new String[cantidad][3];
+        for (int i = 0; i < productos.size(); i++) {
+            d[i][0] = String.valueOf(productos.get(i).getId());
+            d[i][1] = String.valueOf(productos.get(i).getProducto());
+            d[i][2] = String.valueOf(productos.get(i).getCantidad());
+        }
+        //se carga el modelo de la tabla
+        table1.setModel(new DefaultTableModel(d, nombreColumnas));
     }
 
     /**

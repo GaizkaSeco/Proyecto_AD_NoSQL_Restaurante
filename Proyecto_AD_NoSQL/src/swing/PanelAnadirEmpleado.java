@@ -23,10 +23,9 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form PanelAnadirEmpleado
      */
-    public PanelAnadirEmpleado(JPanel content, List<Empleado> empleados) {
+    public PanelAnadirEmpleado(JPanel content) {
         initComponents();
         this.content = content;
-        this.empleados = empleados;
     }
 
     /**
@@ -185,7 +184,6 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
                 int id;
-                empleados.clear();
                 empleados = conexion.cargarEmpleados();
                 if (empleados.size() == 0) {
                     id = 1;
@@ -194,6 +192,14 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
                 }
                 Empleado empNuevo = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
                 conexion.anadirEmpleado(empNuevo);
+                JOptionPane.showMessageDialog(null, "El empleado se ha añadido corectamente.");
+                PanelEmpleados frame = new PanelEmpleados(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
