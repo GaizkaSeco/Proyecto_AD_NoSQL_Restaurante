@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -110,15 +107,15 @@ public class PanelClientes extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null}
-                },
-                new String[]{
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
         ));
         jScrollPane1.setViewportView(table1);
 
@@ -139,17 +136,22 @@ public class PanelClientes extends javax.swing.JPanel {
         javax.swing.GroupLayout anadirBotonLayout = new javax.swing.GroupLayout(anadirBoton);
         anadirBoton.setLayout(anadirBotonLayout);
         anadirBotonLayout.setHorizontalGroup(
-                anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         anadirBotonLayout.setVerticalGroup(
-                anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, -1, 40));
 
         eliminarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        eliminarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                eliminarBotonMousePressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(219, 219, 219));
@@ -159,14 +161,14 @@ public class PanelClientes extends javax.swing.JPanel {
         javax.swing.GroupLayout eliminarBotonLayout = new javax.swing.GroupLayout(eliminarBoton);
         eliminarBoton.setLayout(eliminarBotonLayout);
         eliminarBotonLayout.setHorizontalGroup(
-                eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         eliminarBotonLayout.setVerticalGroup(
-                eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(eliminarBotonLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
-                                .addContainerGap())
+            eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(eliminarBotonLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, -1, 40));
@@ -185,12 +187,12 @@ public class PanelClientes extends javax.swing.JPanel {
         javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
         editarBoton.setLayout(editarBotonLayout);
         editarBotonLayout.setHorizontalGroup(
-                editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         editarBotonLayout.setVerticalGroup(
-                editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 190, -1, 40));
@@ -222,6 +224,17 @@ public class PanelClientes extends javax.swing.JPanel {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_editarBotonMousePressed
+
+    private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed
+        if (table1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
+        } else {
+            //Obtencion del id del objeto seleccionaod en la tabla
+            int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+            conexion.eliminarCliente(id);
+        }
+        modificarTabla();
+    }//GEN-LAST:event_eliminarBotonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

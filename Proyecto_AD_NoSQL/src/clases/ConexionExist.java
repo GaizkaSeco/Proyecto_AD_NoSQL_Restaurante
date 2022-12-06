@@ -36,7 +36,8 @@ public class ConexionExist {
             JOptionPane.showMessageDialog(null, "Error al inicializar la BD eXist.");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error en el driver.");
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
         }
         return null;
@@ -62,7 +63,7 @@ public class ConexionExist {
                     SAXBuilder saxBuilder = new SAXBuilder();
                     Document document = saxBuilder.build(new StringReader(campo));
                     Element root = document.getRootElement();
-                    Empleado empleado = new Empleado(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Double.parseDouble(root.getChildren("SALARIO").get(0).getText()), root.getChildren("FECHACON").get(0).getText(), Integer.parseInt(root.getChildren("TELEFONO").get(0).getText()), root.getChildren("EMAIL").get(0).getText() );
+                    Empleado empleado = new Empleado(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Double.parseDouble(root.getChildren("SALARIO").get(0).getText()), root.getChildren("FECHACON").get(0).getText(), Integer.parseInt(root.getChildren("TELEFONO").get(0).getText()), root.getChildren("EMAIL").get(0).getText());
                     empleados.add(empleado);
                 }
                 col.close();
@@ -97,7 +98,7 @@ public class ConexionExist {
                     SAXBuilder saxBuilder = new SAXBuilder();
                     Document document = saxBuilder.build(new StringReader(campo));
                     Element root = document.getRootElement();
-                    Cliente cliente = new Cliente(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Integer.parseInt(root.getChildren("TELEFONO").get(0).getText()), root.getChildren("EMAIL").get(0).getText() );
+                    Cliente cliente = new Cliente(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Integer.parseInt(root.getChildren("TELEFONO").get(0).getText()), root.getChildren("EMAIL").get(0).getText());
                     clientes.add(cliente);
                 }
                 col.close();
@@ -276,7 +277,71 @@ public class ConexionExist {
                 JOptionPane.showMessageDialog(null, "ERROR al consultar el documento.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void eliminarEmpleado(int id) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un empleado --> update delete
+                ResourceSet result = servicio.query("update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void eliminarPlato(int id) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un plato --> update delete
+                ResourceSet result = servicio.query("update delete /PLATOS/PLATO[@ID='" + id + "']");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void eliminarCliente(int id) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un cliente --> update delete
+                ResourceSet result = servicio.query("update delete /CLIENTES/CLIENTE[@ID='" + id + "']");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void eliminarProducto(int id) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un producto --> update delete
+                ResourceSet result = servicio.query("update delete /ALMACEN/PRODUCTO[@ID='" + id + "']");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
         }
     }
 }

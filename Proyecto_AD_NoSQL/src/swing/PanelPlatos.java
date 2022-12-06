@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -192,7 +189,14 @@ public class PanelPlatos extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirBotonMousePressed
 
     private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed
-        ////////////////////////
+        if (table1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
+        } else {
+            //Obtencion del id del objeto seleccionaod en la tabla
+            int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+            conexion.eliminarPlato(id);
+        }
+        modificarTabla();
     }//GEN-LAST:event_eliminarBotonMousePressed
 
 

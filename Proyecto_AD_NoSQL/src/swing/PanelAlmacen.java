@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -148,6 +145,11 @@ public class PanelAlmacen extends javax.swing.JPanel {
         add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, -1, 40));
 
         eliminarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        eliminarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                eliminarBotonMousePressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(219, 219, 219));
@@ -219,6 +221,17 @@ public class PanelAlmacen extends javax.swing.JPanel {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_editarBotonMousePressed
+
+    private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed
+        if (table1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
+        } else {
+            //Obtencion del id del objeto seleccionaod en la tabla
+            int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+            conexion.eliminarProducto(id);
+        }
+        modificarTabla();
+    }//GEN-LAST:event_eliminarBotonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
