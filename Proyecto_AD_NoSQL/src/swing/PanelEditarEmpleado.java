@@ -4,8 +4,12 @@
  */
 package swing;
 
+import clases.ConexionExist;
+import clases.Empleado;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -13,12 +17,28 @@ import javax.swing.JPanel;
  */
 public class PanelEditarEmpleado extends javax.swing.JPanel {
     JPanel content;
+    int id;
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelEditarEmpleado
      */
-    public PanelEditarEmpleado(JPanel content) {
+    public PanelEditarEmpleado(JPanel content, List<Empleado> empleados, int id) {
         initComponents();
         this.content = content;
+        this.id = id;
+
+        for (Empleado empleado : empleados) {
+            if (empleado.getId() == id) {
+                nombreField.setText(empleado.getNombre());
+                salarioField.setText(String.valueOf(empleado.getSalario()));
+                fechaField.setText(empleado.getFechaCon());
+                telefonoField.setText(String.valueOf(empleado.getTelefono()));
+                emailField.setText(empleado.getEmail());
+            }
+        }
+        if (nombreField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Ha surgido un problema al cargar los datos.");
+        }
     }
 
     /**
@@ -40,7 +60,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         fechaField = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        botonAnadir = new javax.swing.JPanel();
+        editarBoton = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         telefonoField = new javax.swing.JTextField();
@@ -92,24 +112,29 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
         add(fechaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 300, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 300, -1));
 
-        botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editarBotonMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Editar Empleado");
 
-        javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
-        botonAnadir.setLayout(botonAnadirLayout);
-        botonAnadirLayout.setHorizontalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
+        editarBoton.setLayout(editarBotonLayout);
+        editarBotonLayout.setHorizontalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        botonAnadirLayout.setVerticalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        editarBotonLayout.setVerticalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
+        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -166,12 +191,33 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
         content.repaint();
     }//GEN-LAST:event_cancelarBoton2MousePressed
 
+    private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        try {
+            double salario = Double.parseDouble(salarioField.getText());
+            int telefono = Integer.parseInt(telefonoField.getText());
+            if (nombreField.getText().isBlank() || fechaField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                Empleado updateEmp = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
+                conexion.editarEmpleado(updateEmp);
+                JOptionPane.showMessageDialog(null, "El empleado se ha editado corectamente.");
+                PanelEmpleados frame = new PanelEmpleados(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+        }
+    }//GEN-LAST:event_editarBotonMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel botonAnadir;
-    private javax.swing.JPanel cancelarBoton;
-    private javax.swing.JPanel cancelarBoton1;
     private javax.swing.JPanel cancelarBoton2;
+    private javax.swing.JPanel editarBoton;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fechaField;
     private javax.swing.JLabel jLabel1;
@@ -182,8 +228,6 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

@@ -216,13 +216,20 @@ public class PanelClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
-        PanelEditarCliente frame = new PanelEditarCliente(content);
-        frame.setSize(830, 550);
-        frame.setLocation(0, 0);
-        content.removeAll();
-        content.add(frame, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+        if (table1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Para editar debes seleccionar en la tabla.");
+        } else {
+            int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+            clientes.clear();
+            clientes = conexion.cargarClientes();
+            PanelEditarCliente frame = new PanelEditarCliente(content, clientes, id);
+            frame.setSize(830,550);
+            frame.setLocation(0,0);
+            content.removeAll();
+            content.add(frame, BorderLayout.CENTER);
+            content.revalidate();
+            content.repaint();
+        }
     }//GEN-LAST:event_editarBotonMousePressed
 
     private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed

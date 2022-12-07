@@ -4,22 +4,40 @@
  */
 package swing;
 
+import clases.Cliente;
+import clases.ConexionExist;
+import clases.Empleado;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 
 /**
- *
  * @author omega
  */
 public class PanelEditarCliente extends javax.swing.JPanel {
     JPanel content;
-    
+    int id;
+    ConexionExist conexion = new ConexionExist();
+
     /**
      * Creates new form PanelEditarCliente
      */
-    public PanelEditarCliente(JPanel content) {
+    public PanelEditarCliente(JPanel content, List<Cliente> clientes, int id) {
         initComponents();
         this.content = content;
+        this.id = id;
+
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == id) {
+                nombreField.setText(cliente.getNombre());
+                telefonoField.setText(String.valueOf(cliente.getTelefono()));
+                emailField.setText(cliente.getEmail());
+            }
+        }
+        if (nombreField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Ha surgido un problema al cargar los datos.");
+        }
     }
 
     /**
@@ -41,9 +59,9 @@ public class PanelEditarCliente extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        botonAnadir = new javax.swing.JPanel();
+        editarBoton = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        cancelarBoton1 = new javax.swing.JPanel();
+        cancelarBoton = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -85,30 +103,35 @@ public class PanelEditarCliente extends javax.swing.JPanel {
         add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 300, 20));
         add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 300, -1));
 
-        botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editarBotonMousePressed(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(57, 57, 58));
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Editar Cliente");
 
-        javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
-        botonAnadir.setLayout(botonAnadirLayout);
-        botonAnadirLayout.setHorizontalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
+        editarBoton.setLayout(editarBotonLayout);
+        editarBotonLayout.setHorizontalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        botonAnadirLayout.setVerticalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        editarBotonLayout.setVerticalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
+        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 160, 50));
 
-        cancelarBoton1.setBackground(new java.awt.Color(57, 57, 58));
-        cancelarBoton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                cancelarBoton1MousePressed(evt);
+                cancelarBotonMousePressed(evt);
             }
         });
 
@@ -116,34 +139,56 @@ public class PanelEditarCliente extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Cancelar");
 
-        javax.swing.GroupLayout cancelarBoton1Layout = new javax.swing.GroupLayout(cancelarBoton1);
-        cancelarBoton1.setLayout(cancelarBoton1Layout);
-        cancelarBoton1Layout.setHorizontalGroup(
-            cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout cancelarBotonLayout = new javax.swing.GroupLayout(cancelarBoton);
+        cancelarBoton.setLayout(cancelarBotonLayout);
+        cancelarBotonLayout.setHorizontalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        cancelarBoton1Layout.setVerticalGroup(
-            cancelarBoton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        cancelarBotonLayout.setVerticalGroup(
+            cancelarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(cancelarBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
+        add(cancelarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 160, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarBoton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton1MousePressed
+    private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
         PanelClientes frame = new PanelClientes(content);
-        frame.setSize(830,550);
-        frame.setLocation(0,0);
+        frame.setSize(830, 550);
+        frame.setLocation(0, 0);
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }//GEN-LAST:event_cancelarBoton1MousePressed
+    }//GEN-LAST:event_cancelarBotonMousePressed
+
+    private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        try {
+            int telefono = Integer.parseInt(telefonoField.getText());
+            if (nombreField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                Cliente updateCli = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
+                conexion.editarCliente(updateCli);
+                JOptionPane.showMessageDialog(null, "El cliente se ha editado corectamente.");
+                PanelClientes frame = new PanelClientes(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+        }
+    }//GEN-LAST:event_editarBotonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel botonAnadir;
-    private javax.swing.JPanel cancelarBoton1;
+    private javax.swing.JPanel cancelarBoton;
+    private javax.swing.JPanel editarBoton;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

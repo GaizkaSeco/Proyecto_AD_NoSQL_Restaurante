@@ -1,6 +1,5 @@
 package clases;
 
-import net.xqj.exist.bin.D;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -41,6 +40,39 @@ public class ConexionExist {
             JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
         }
         return null;
+    }
+
+    public Usuario login(String usuario, String contrasena) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $user in /USUARIOS/USUARIO[NOMBRE = '" + usuario + "' and CONTRASENA = '" + contrasena + "'] return $user");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    return new Usuario(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), true);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return new Usuario(false);
     }
 
     public List<Empleado> cargarEmpleados() {
@@ -287,7 +319,7 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un empleado --> update delete
-                ResourceSet result = servicio.query("update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']");
+                servicio.query("update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']");
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -303,7 +335,7 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un plato --> update delete
-                ResourceSet result = servicio.query("update delete /PLATOS/PLATO[@ID='" + id + "']");
+                servicio.query("update delete /PLATOS/PLATO[@ID='" + id + "']");
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -319,7 +351,7 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un cliente --> update delete
-                ResourceSet result = servicio.query("update delete /CLIENTES/CLIENTE[@ID='" + id + "']");
+                servicio.query("update delete /CLIENTES/CLIENTE[@ID='" + id + "']");
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -335,7 +367,71 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update delete
-                ResourceSet result = servicio.query("update delete /ALMACEN/PRODUCTO[@ID='" + id + "']");
+                servicio.query("update delete /ALMACEN/PRODUCTO[@ID='" + id + "']");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void editarEmpleado(Empleado empleado) {
+        Collection col = conectar();
+        String updateEmp = "<EMPLEADO ID='" + empleado.getId() + "'>" +
+                "<NOMBRE>" + empleado.getNombre() + "</NOMBRE>" +
+                "<SALARIO>" + empleado.getSalario() + "</SALARIO>" +
+                "<FECHACON>" + empleado.getFechaCon() + "</FECHACON>" +
+                "<TELEFONO>" + empleado.getTelefono() + "</TELEFONO>" +
+                "<EMAIL>" + empleado.getEmail() + "</EMAIL>" +
+                "</EMPLEADO>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un producto --> update replace
+                servicio.query("update replace /EMPLEADOS/EMPLEADO[@ID=" + empleado.getId() + "] with" + updateEmp);
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void editarProducto(Producto producto) {
+        Collection col = conectar();
+        String updatePro = "<PRODUCTO ID='" + producto.getId() + "'>" +
+                "<PRODUCTO>" + producto.getProducto() + "</PRODUCTO>" +
+                "<CANTIDAD>" + producto.getCantidad() + "</CANTIDAD>" +
+                "</PRODUCTO>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un producto --> update replace
+                servicio.query("update replace /ALMACEN/PRODUCTO[@ID=" + producto.getId() + "] with" + updatePro);
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void editarCliente(Cliente cliente) {
+        Collection col = conectar();
+        String updateCli = "<CLIENTE ID='" + cliente.getId() + "'>" +
+                "<NOMBRE>" + cliente.getNombre() + "</NOMBRE>" +
+                "<TELEFONO>" + cliente.getTelefono() + "</TELEFONO>" +
+                "<EMAIL>" + cliente.getEmail() + "</EMAIL>" +
+                "</CLIENTE>";
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Consulta para borrar un producto --> update replace
+                servicio.query("update replace /CLIENTES/CLIENTE[@ID=" + cliente.getId() + "] with" + updateCli);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");

@@ -4,8 +4,15 @@
  */
 package swing;
 
+import clases.Cliente;
+import clases.ConexionExist;
+import clases.Empleado;
+import clases.Producto;
+import net.xqj.exist.bin.C;
+
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 
 
 /**
@@ -14,12 +21,25 @@ import javax.swing.JPanel;
  */
 public class PanelEditarProducto extends javax.swing.JPanel {
     JPanel content;
+    int id;
+    ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelEditarProducto
      */
-    public PanelEditarProducto(JPanel content) {
+    public PanelEditarProducto(JPanel content, List<Producto> productos, int id) {
         initComponents();
         this.content = content;
+        this.id = id;
+
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                nombreField.setText(producto.getProducto());
+                cantidadField.setText(String.valueOf(producto.getCantidad()));
+            }
+        }
+        if (nombreField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Ha surgido un problema al cargar los datos.");
+        }
     }
 
     /**
@@ -36,9 +56,9 @@ public class PanelEditarProducto extends javax.swing.JPanel {
         nombreField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        salarioField = new javax.swing.JTextField();
+        cantidadField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        botonAnadir = new javax.swing.JPanel();
+        editarBoton = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cancelarBoton = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -67,29 +87,34 @@ public class PanelEditarProducto extends javax.swing.JPanel {
         jLabel3.setText("Cantidad:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 260, 20));
 
-        salarioField.setBackground(new java.awt.Color(204, 204, 204));
-        salarioField.setBorder(null);
-        add(salarioField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 300, 20));
+        cantidadField.setBackground(new java.awt.Color(204, 204, 204));
+        cantidadField.setBorder(null);
+        add(cantidadField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 300, 20));
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 300, -1));
 
-        botonAnadir.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.setBackground(new java.awt.Color(57, 57, 58));
+        editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editarBotonMousePressed(evt);
+            }
+        });
 
         jLabel6.setForeground(new java.awt.Color(219, 219, 219));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Editar Producto");
 
-        javax.swing.GroupLayout botonAnadirLayout = new javax.swing.GroupLayout(botonAnadir);
-        botonAnadir.setLayout(botonAnadirLayout);
-        botonAnadirLayout.setHorizontalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
+        editarBoton.setLayout(editarBotonLayout);
+        editarBotonLayout.setHorizontalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
-        botonAnadirLayout.setVerticalGroup(
-            botonAnadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        editarBotonLayout.setVerticalGroup(
+            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 160, 50));
+        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 160, 50));
 
         cancelarBoton.setBackground(new java.awt.Color(57, 57, 58));
         cancelarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,10 +151,33 @@ public class PanelEditarProducto extends javax.swing.JPanel {
         content.repaint();
     }//GEN-LAST:event_cancelarBotonMousePressed
 
+    private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        try {
+            int cantidad = Integer.parseInt(cantidadField.getText());
+            if (nombreField.getText().isBlank()){
+                JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
+            } else {
+                Producto updatePro = new Producto(id, nombreField.getText(), cantidad);
+                conexion.editarProducto(updatePro);
+                JOptionPane.showMessageDialog(null, "El producto se ha editado corectamente.");
+                PanelAlmacen frame = new PanelAlmacen(content);
+                frame.setSize(830,550);
+                frame.setLocation(0,0);
+                content.removeAll();
+                content.add(frame, BorderLayout.CENTER);
+                content.revalidate();
+                content.repaint();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos");
+        }
+    }//GEN-LAST:event_editarBotonMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel botonAnadir;
     private javax.swing.JPanel cancelarBoton;
+    private javax.swing.JTextField cantidadField;
+    private javax.swing.JPanel editarBoton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -138,6 +186,5 @@ public class PanelEditarProducto extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField nombreField;
-    private javax.swing.JTextField salarioField;
     // End of variables declaration//GEN-END:variables
 }

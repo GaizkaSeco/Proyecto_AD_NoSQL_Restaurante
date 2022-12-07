@@ -228,13 +228,20 @@ public class PanelEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
-        PanelEditarEmpleado frame = new PanelEditarEmpleado(content);
-        frame.setSize(830,550);
-        frame.setLocation(0,0);
-        content.removeAll();
-        content.add(frame, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+        if (table1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Para editar debes seleccionar en la tabla.");
+        } else {
+            int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+            empleados.clear();
+            empleados = conexion.cargarEmpleados();
+            PanelEditarEmpleado frame = new PanelEditarEmpleado(content, empleados, id);
+            frame.setSize(830,550);
+            frame.setLocation(0,0);
+            content.removeAll();
+            content.add(frame, BorderLayout.CENTER);
+            content.revalidate();
+            content.repaint();
+        }
     }//GEN-LAST:event_editarBotonMousePressed
 
     private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed

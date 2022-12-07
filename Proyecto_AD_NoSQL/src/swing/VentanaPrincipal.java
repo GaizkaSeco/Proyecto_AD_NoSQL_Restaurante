@@ -4,6 +4,8 @@
  */
 package swing;
 
+import clases.Usuario;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
  * @author 9FDAM09
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    public VentanaPrincipal() {
+    public VentanaPrincipal(Usuario user) {
         initComponents();
         
         PanelPlatos frame = new PanelPlatos(this.content);
@@ -487,7 +489,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                new VentanaPrincipal(new Usuario(1, "Prueba", true)).setVisible(true);
             }
         });
     }

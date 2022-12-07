@@ -4,12 +4,17 @@
  */
 package swing;
 
+import clases.ConexionExist;
+import clases.Usuario;
+
+import javax.swing.*;
+
 /**
  *
  * @author omega
  */
 public class VentanaLogin extends javax.swing.JFrame {
-
+    ConexionExist conexion =new ConexionExist();
     /**
      * Creates new form VentanaLogin
      */
@@ -30,9 +35,9 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        contrasenaField = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        userField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         botonIniciar = new javax.swing.JPanel();
@@ -58,19 +63,14 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel3.setText("Contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 230, 30));
+        contrasenaField.setBackground(new java.awt.Color(204, 204, 204));
+        contrasenaField.setBorder(null);
+        jPanel1.add(contrasenaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 230, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 230, 10));
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 220, 30));
+        userField.setBackground(new java.awt.Color(204, 204, 204));
+        userField.setBorder(null);
+        jPanel1.add(userField, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 220, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 220, 10));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
@@ -98,14 +98,17 @@ public class VentanaLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
     private void botonIniciarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIniciarMousePressed
-        VentanaPrincipal frame = new VentanaPrincipal();
-        frame.setVisible(true);
-        dispose();
+        if (userField.getText().isBlank() || contrasenaField.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Los campos de usuario y contrasena son obligatorios.");
+        } else {
+            Usuario user = conexion.login(userField.getText(), contrasenaField.getText());
+            if (user.isLogin()) {
+                VentanaPrincipal frame = new VentanaPrincipal(user);
+                frame.setVisible(true);
+                dispose();
+            }
+        }
     }//GEN-LAST:event_botonIniciarMousePressed
 
     /**
@@ -145,15 +148,15 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonIniciar;
+    private javax.swing.JPasswordField contrasenaField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField userField;
     // End of variables declaration//GEN-END:variables
 }
