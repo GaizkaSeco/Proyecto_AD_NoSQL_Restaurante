@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -39,12 +40,14 @@ public class PanelEmpleados extends javax.swing.JPanel {
     List<Empleado> empleados = new ArrayList<Empleado>();
     String[] nombreColumnas = {"id", "Nombre", "Salario", "Fecha Contrato", "Telefono", "Email"};
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
     /**
      * Creates new form PanelEmpleados
      */
-    public PanelEmpleados(JPanel content) {
+    public PanelEmpleados(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
 
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
@@ -218,7 +221,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
         cargarDatos();
-        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content);
+        PanelAnadirEmpleado frame = new PanelAnadirEmpleado(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -234,7 +237,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             empleados.clear();
             empleados = conexion.cargarEmpleados();
-            PanelEditarEmpleado frame = new PanelEditarEmpleado(content, empleados, id);
+            PanelEditarEmpleado frame = new PanelEditarEmpleado(content, empleados, id, user);
             frame.setSize(830,550);
             frame.setLocation(0,0);
             content.removeAll();

@@ -6,6 +6,7 @@ package swing;
 
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -19,13 +20,15 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
     JPanel content;
     List<Empleado> empleados;
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
 
     /**
      * Creates new form PanelAnadirEmpleado
      */
-    public PanelAnadirEmpleado(JPanel content) {
+    public PanelAnadirEmpleado(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
     }
 
     /**
@@ -167,7 +170,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
-        PanelEmpleados frame = new PanelEmpleados(content);
+        PanelEmpleados frame = new PanelEmpleados(content, user);
         frame.setSize(830, 550);
         frame.setLocation(0, 0);
         content.removeAll();
@@ -191,9 +194,9 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
                     id = empleados.get(empleados.size() - 1).getId() + 1;
                 }
                 Empleado empNuevo = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
-                conexion.anadirEmpleado(empNuevo);
+                conexion.anadirEmpleado(empNuevo, user);
                 JOptionPane.showMessageDialog(null, "El empleado se ha añadido corectamente.");
-                PanelEmpleados frame = new PanelEmpleados(content);
+                PanelEmpleados frame = new PanelEmpleados(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

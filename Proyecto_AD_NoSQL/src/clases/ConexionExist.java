@@ -1,5 +1,6 @@
 package clases;
 
+import org.exist.security.User;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -216,7 +217,7 @@ public class ConexionExist {
         return platos;
     }
 
-    public void anadirEmpleado(Empleado empNuevo) {
+    public void anadirEmpleado(Empleado empNuevo, Usuario user) {
         Collection col = conectar();
         String nuevoemp = "<EMPLEADO ID='" + empNuevo.getId() + "'>" +
                 "<NOMBRE>" + empNuevo.getNombre() + "</NOMBRE>" +
@@ -230,8 +231,10 @@ public class ConexionExist {
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
-                ResourceSet result = servicio.query("update insert " + nuevoemp + " into /EMPLEADOS");
+                String sentencia = "update insert " + nuevoemp + " into /EMPLEADOS";
+                ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
+                registroCambios(user, sentencia);
                 //cerramos
                 col.close();
             } catch (XMLDBException e) {
@@ -448,7 +451,7 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //recuperar el id mas alto del registro para añadirle el siguiente
-                ResourceSet result = servicio.query("max(/LOGIN/REGISTRO/ID) + 1");
+                ResourceSet result = servicio.query("max(/LOGINS/REGISTRO/ID) + 1");
                 // recorrer los datos del recurso.
                 int id = 0;
                 ResourceIterator i = result.getIterator();
@@ -464,7 +467,41 @@ public class ConexionExist {
                         "</REGISTRO>";
 
                 //insertar el registro de login
-                servicio.query("update insert " + registro + " into /LOGIN");
+                servicio.query("update insert " + registro + " into /LOGINS");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void registroCambios(Usuario user, String sentencia) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //recuperar el id mas alto del registro para añadirle el siguiente
+                ResourceSet result = servicio.query("max(/REGISTROS/REGISTRO/ID) + 1");
+                // recorrer los datos del recurso.
+                int id = 0;
+                ResourceIterator i = result.getIterator();
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    id = Integer.parseInt(r.getContent().toString());
+                }
+                String registro = "<REGISTRO>" +
+                        "<ID>" + id + "</ID>" +
+                        "<IDUSUARIO>" + user.getId() + "</IDUSUARIO>" +
+                        "<USUARIO>" + user.getNombre() + "</USUARIO>" +
+                        "<FECHA>" + new Date() + "</FECHA>" +
+                        "<SENTECIA>" + sentencia + "</SENTECIA>" +
+                        "</REGISTRO>";
+
+                //insertar el registro de login
+                servicio.query("update insert " + registro + " into /REGISTROS");
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");

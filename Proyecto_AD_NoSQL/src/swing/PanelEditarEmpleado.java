@@ -6,6 +6,7 @@ package swing;
 
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.List;
@@ -18,14 +19,16 @@ import javax.swing.*;
 public class PanelEditarEmpleado extends javax.swing.JPanel {
     JPanel content;
     int id;
+    Usuario user;
     ConexionExist conexion = new ConexionExist();
     /**
      * Creates new form PanelEditarEmpleado
      */
-    public PanelEditarEmpleado(JPanel content, List<Empleado> empleados, int id) {
+    public PanelEditarEmpleado(JPanel content, List<Empleado> empleados, int id, Usuario user) {
         initComponents();
         this.content = content;
         this.id = id;
+        this.user = user;
 
         for (Empleado empleado : empleados) {
             if (empleado.getId() == id) {
@@ -182,7 +185,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBoton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton2MousePressed
-        PanelEmpleados frame = new PanelEmpleados(content);
+        PanelEmpleados frame = new PanelEmpleados(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -201,7 +204,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
                 Empleado updateEmp = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
                 conexion.editarEmpleado(updateEmp);
                 JOptionPane.showMessageDialog(null, "El empleado se ha editado corectamente.");
-                PanelEmpleados frame = new PanelEmpleados(content);
+                PanelEmpleados frame = new PanelEmpleados(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

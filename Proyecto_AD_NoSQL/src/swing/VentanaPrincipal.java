@@ -17,8 +17,10 @@ import javax.swing.JPanel;
  * @author 9FDAM09
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+    Usuario user;
     public VentanaPrincipal(Usuario user) {
         initComponents();
+        this.user = user;
         
         PanelPlatos frame = new PanelPlatos(this.content);
         frame.setSize(830,550);
@@ -387,7 +389,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
         
-        PanelEmpleados frame = new PanelEmpleados(this.content);
+        PanelEmpleados frame = new PanelEmpleados(this.content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
