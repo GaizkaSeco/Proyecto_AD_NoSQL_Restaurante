@@ -23,7 +23,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         PanelPlatos frame = new PanelPlatos(this.content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
-        
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();

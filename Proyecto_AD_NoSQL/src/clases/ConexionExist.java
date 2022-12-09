@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ConexionExist {
@@ -435,6 +436,39 @@ public class ConexionExist {
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
+        }
+    }
+
+    public void registroLogin(Usuario user) {
+        Collection col = conectar();
+        if (col != null) {
+            try {
+                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //recuperar el id mas alto del registro para añadirle el siguiente
+                ResourceSet result = servicio.query("max(/LOGIN/REGISTRO/ID) + 1");
+                // recorrer los datos del recurso.
+                int id = 0;
+                ResourceIterator i = result.getIterator();
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    id = Integer.parseInt(r.getContent().toString());
+                }
+                String registro = "<REGISTRO>" +
+                        "<ID>" + id + "</ID>" +
+                        "<IDUSUARIO>" + user.getId() + "</IDUSUARIO>" +
+                        "<USUARIO>" + user.getNombre() + "</USUARIO>" +
+                        "<FECHA>" + new Date() + "</FECHA>" +
+                        "</REGISTRO>";
+
+                //insertar el registro de login
+                servicio.query("update insert " + registro + " into /LOGIN");
+                col.close();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");
+                e.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");

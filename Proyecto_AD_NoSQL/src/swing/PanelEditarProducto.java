@@ -4,11 +4,8 @@
  */
 package swing;
 
-import clases.Cliente;
 import clases.ConexionExist;
-import clases.Empleado;
 import clases.Producto;
-import net.xqj.exist.bin.C;
 
 import java.awt.BorderLayout;
 import java.util.List;

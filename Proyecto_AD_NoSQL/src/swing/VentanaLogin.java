@@ -8,6 +8,7 @@ import clases.ConexionExist;
 import clases.Usuario;
 
 import javax.swing.*;
+import java.io.File;
 
 /**
  *
@@ -104,6 +105,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         } else {
             Usuario user = conexion.login(userField.getText(), contrasenaField.getText());
             if (user.isLogin()) {
+                conexion.registroLogin(user);
                 VentanaPrincipal frame = new VentanaPrincipal(user);
                 frame.setVisible(true);
                 dispose();
