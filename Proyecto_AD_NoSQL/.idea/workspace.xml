@@ -33,7 +33,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/omega/Desktop/Librerias/Librerias Proyecto jokin/jdom-2.0.6.1.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/omega/Desktop/Librerias/Librerias Proyecto jokin/BaseX104.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -44,7 +44,20 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.CrearColeccion">
+    <configuration name="CrearColeccion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="xmls.CrearColeccion" />
+      <module name="Proyecto_AD_NoSQL" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="xmls.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="VentanaLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="swing.VentanaLogin" />
       <module name="Proyecto_AD_NoSQL" />
@@ -60,6 +73,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CrearColeccion" />
         <item itemvalue="Application.VentanaLogin" />
       </list>
     </recent_temporary>
@@ -77,7 +91,8 @@
       <workItem from="1670326487186" duration="7419000" />
       <workItem from="1670347126723" duration="200000" />
       <workItem from="1670403025858" duration="8078000" />
-      <workItem from="1670575934113" duration="5157000" />
+      <workItem from="1670575934113" duration="6583000" />
+      <workItem from="1670665029043" duration="7326000" />
     </task>
     <servers />
   </component>
