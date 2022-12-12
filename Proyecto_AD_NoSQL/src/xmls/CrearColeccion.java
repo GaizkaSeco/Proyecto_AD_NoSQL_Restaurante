@@ -4,6 +4,11 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
+import org.xmldb.api.DatabaseManager;
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.Database;
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.CollectionManagementService;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 public class CrearColeccion {
@@ -20,23 +26,37 @@ public class CrearColeccion {
     static String usuPwd = "admin"; //Clave
 
     public static void main(String[] args) {
-        crearAlmacen();
-        crearEmpleados();
-        crearClientes();
-        crearPlatos();
-        crearUsuarios();
-        crearLogin();
-        crearControlConsultas();
-        /*Class cl = Class.forName(driver);
-        Database database = (Database) cl.getDeclaredConstructor().newInstance();
-        database.setProperty("create-database", "true");
-        DatabaseManager.registerDatabase(database);
+        try {
+            crearAlmacen();
+            crearEmpleados();
+            crearClientes();
+            crearPlatos();
+            crearUsuarios();
+            crearLogin();
+            crearControlConsultas();
+            Class cl = Class.forName(driver);
+            Database database = (Database) cl.getDeclaredConstructor().newInstance();
+            database.setProperty("create-database", "true");
+            DatabaseManager.registerDatabase(database);
 
-        Collection parent = DatabaseManager.getCollection(URI);
-        CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-        Collection col = mgt.createCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD");
-        col.close();
-        parent.close();*/
+            Collection parent = DatabaseManager.getCollection(URI);
+            CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
+            Collection col = mgt.createCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD");
+            col.close();
+            parent.close();
+        } catch (XMLDBException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void crearAlmacen() {
