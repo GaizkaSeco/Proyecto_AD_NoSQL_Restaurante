@@ -166,7 +166,7 @@ public class ConexionExist {
                     SAXBuilder saxBuilder = new SAXBuilder();
                     Document document = saxBuilder.build(new StringReader(campo));
                     Element root = document.getRootElement();
-                    Producto producto = new Producto(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("PRODUCTO").get(0).getText(), Integer.parseInt(root.getChildren("CANTIDAD").get(0).getText()));
+                    Producto producto = new Producto(Integer.parseInt(root.getAttribute("ID").getValue()), root.getChildren("NOMBRE").get(0).getText(), Integer.parseInt(root.getChildren("CANTIDAD").get(0).getText()));
                     productos.add(producto);
                 }
                 col.close();
@@ -271,7 +271,7 @@ public class ConexionExist {
     public void anadirProducto(Producto proNuevo) {
         Collection col = conectar();
         String nuevopro = "<PRODUCTO ID='" + proNuevo.getId() + "'>" +
-                "<PRODUCTO>" + proNuevo.getProducto() + "</PRODUCTO>" +
+                "<NOMBRE>" + proNuevo.getProducto() + "</NOMBRE>" +
                 "<CANTIDAD>" + proNuevo.getCantidad() + "</CANTIDAD>" +
                 "</PRODUCTO>";
         if (col != null) {
@@ -406,7 +406,7 @@ public class ConexionExist {
     public void editarProducto(Producto producto) {
         Collection col = conectar();
         String updatePro = "<PRODUCTO ID='" + producto.getId() + "'>" +
-                "<PRODUCTO>" + producto.getProducto() + "</PRODUCTO>" +
+                "<NOMBRE>" + producto.getProducto() + "</NOMBRE>" +
                 "<CANTIDAD>" + producto.getCantidad() + "</CANTIDAD>" +
                 "</PRODUCTO>";
         if (col != null) {

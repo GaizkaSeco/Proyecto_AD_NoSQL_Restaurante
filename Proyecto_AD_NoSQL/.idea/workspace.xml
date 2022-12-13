@@ -28,28 +28,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/omega/Desktop/Repositorios/Proyecto_AD_NoSQL_Restaurante/Proyecto_AD_NoSQL/src/libreriasJars",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/omega/Desktop/Repositorios/Proyecto_AD_NoSQL_Restaurante/Proyecto_AD_NoSQL/src/libreriasJars&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\omega\Desktop\Repositorios\Proyecto_AD_NoSQL_Restaurante\Proyecto_AD_NoSQL\src\libreriasJars" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CrearColeccion">
+  <component name="RunManager" selected="Application.VentanaLogin">
     <configuration name="CrearColeccion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="xmls.CrearColeccion" />
       <module name="Proyecto_AD_NoSQL" />
@@ -78,8 +78,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CrearColeccion" />
         <item itemvalue="Application.VentanaLogin" />
+        <item itemvalue="Application.CrearColeccion" />
       </list>
     </recent_temporary>
   </component>
@@ -100,6 +100,8 @@
       <workItem from="1670665029043" duration="7771000" />
       <workItem from="1670854622350" duration="943000" />
       <workItem from="1670871723129" duration="1178000" />
+      <workItem from="1670875436523" duration="1072000" />
+      <workItem from="1670962596231" duration="1334000" />
     </task>
     <servers />
   </component>
