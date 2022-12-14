@@ -1,9 +1,6 @@
 package xmls;
 
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import org.w3c.dom.*;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
@@ -26,15 +23,14 @@ public class CrearColeccion {
     static String usuPwd = "admin"; //Clave
 
     public static void main(String[] args) {
-        try {
-            crearAlmacen();
-            crearEmpleados();
-            crearClientes();
-            crearPlatos();
-            crearUsuarios();
-            crearLogin();
-            crearControlConsultas();
-            Class cl = Class.forName(driver);
+        crearAlmacen();
+        crearEmpleados();
+        crearClientes();
+        crearPlatos();
+        crearUsuarios();
+        crearLogin();
+        crearControlConsultas();
+            /*Class cl = Class.forName(driver);
             Database database = (Database) cl.getDeclaredConstructor().newInstance();
             database.setProperty("create-database", "true");
             DatabaseManager.registerDatabase(database);
@@ -43,20 +39,7 @@ public class CrearColeccion {
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
             Collection col = mgt.createCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD");
             col.close();
-            parent.close();
-        } catch (XMLDBException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+            parent.close();*/
     }
 
     public static void crearAlmacen() {
@@ -71,11 +54,13 @@ public class CrearColeccion {
             //Creamos cada elemento
             Element producto = document.createElement("PRODUCTO");
             document.getDocumentElement().appendChild(producto);
+            crearAtributo("ID", "0", producto, document);
             crearElemento("NOMBRE", "Tomate", producto, document);
             crearElemento("CANTIDAD", "100", producto, document);
 
             Element producto2 = document.createElement("PRODUCTO");
             document.getDocumentElement().appendChild(producto2);
+            crearAtributo("ID", "1", producto2, document);
             crearElemento("NOMBRE", "Mararrones", producto2, document);
             crearElemento("CANTIDAD", "200", producto2, document);
 
@@ -106,6 +91,7 @@ public class CrearColeccion {
             //Creamos cada elemento
             Element empleado = document.createElement("EMPLEADO");
             document.getDocumentElement().appendChild(empleado);
+            crearAtributo("ID", "0", empleado, document);
             crearElemento("NOMBRE", "Gaizka", empleado, document);
             crearElemento("SALARIO", "1000.0", empleado, document);
             crearElemento("FECHACON", "12/12/2021", empleado, document);
@@ -139,6 +125,7 @@ public class CrearColeccion {
             //Creamos cada elemento
             Element cliente = document.createElement("CLIENTE");
             document.getDocumentElement().appendChild(cliente);
+            crearAtributo("ID", "0", cliente, document);
             crearElemento("NOMBRE", "Jokin", cliente, document);
             crearElemento("TELEFONO", "987654321", cliente, document);
             crearElemento("EMAIL", "jokin@gmail.com", cliente, document);
@@ -170,6 +157,7 @@ public class CrearColeccion {
             //Creamos cada elemento
             Element plato = document.createElement("PLATO");
             document.getDocumentElement().appendChild(plato);
+            crearAtributo("ID", "0", plato, document);
             crearElemento("NOMBRE", "Macarrones con tomate", plato, document);
             crearElemento("DESCRIPCION", "Macarrones con tomate", plato, document);
             crearElemento("PRECIO", "4.95", plato, document);
@@ -202,6 +190,7 @@ public class CrearColeccion {
             //Creamos cada elemento
             Element usuario = document.createElement("USUARIO");
             document.getDocumentElement().appendChild(usuario);
+            crearAtributo("ID", "0", usuario, document);
             crearElemento("NOMBRE", "admin", usuario, document);
             crearElemento("CONTRASENA", "12345", usuario, document);
 
@@ -289,5 +278,12 @@ public class CrearColeccion {
         Text text = document.createTextNode(valor);
         raiz.appendChild(elem);
         elem.appendChild(text);
+    }
+
+    static void crearAtributo(String datoPlato, String valor, Element raiz, Document document) {
+        Attr atribute = document.createAttribute(datoPlato);
+        Text text = document.createTextNode(valor);
+        raiz.setAttributeNode(atribute);
+        atribute.appendChild(text);
     }
 }
