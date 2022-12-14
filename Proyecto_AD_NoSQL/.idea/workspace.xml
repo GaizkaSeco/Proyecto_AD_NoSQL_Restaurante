@@ -49,7 +49,7 @@
       <recent name="C:\Users\omega\Desktop\Repositorios\Proyecto_AD_NoSQL_Restaurante\Proyecto_AD_NoSQL\src\libreriasJars" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.VentanaPrincipal">
+  <component name="RunManager" selected="Application.VentanaLogin">
     <configuration name="CrearColeccion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="xmls.CrearColeccion" />
       <module name="Proyecto_AD_NoSQL" />
@@ -91,9 +91,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VentanaPrincipal" />
-        <item itemvalue="Application.CrearColeccion" />
         <item itemvalue="Application.VentanaLogin" />
+        <item itemvalue="Application.CrearColeccion" />
+        <item itemvalue="Application.VentanaPrincipal" />
       </list>
     </recent_temporary>
   </component>
@@ -116,7 +116,7 @@
       <workItem from="1670871723129" duration="1178000" />
       <workItem from="1670875436523" duration="1072000" />
       <workItem from="1670962596231" duration="1900000" />
-      <workItem from="1671009788011" duration="3200000" />
+      <workItem from="1671009788011" duration="4929000" />
     </task>
     <servers />
   </component>

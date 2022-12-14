@@ -6,6 +6,7 @@ import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
+import org.xmldb.api.modules.XMLResource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
@@ -30,16 +32,32 @@ public class CrearColeccion {
         crearUsuarios();
         crearLogin();
         crearControlConsultas();
-            /*Class cl = Class.forName(driver);
+        try {
+            Class cl = Class.forName(driver);
             Database database = (Database) cl.getDeclaredConstructor().newInstance();
             database.setProperty("create-database", "true");
             DatabaseManager.registerDatabase(database);
 
-            Collection parent = DatabaseManager.getCollection(URI);
+            Collection parent = DatabaseManager.getCollection(URI, usu, usuPwd);
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
             Collection col = mgt.createCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD");
             col.close();
-            parent.close();*/
+            parent.close();
+            URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD";
+        } catch (XMLDBException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        xmlToCollection();
     }
 
     public static void crearAlmacen() {
@@ -151,7 +169,7 @@ public class CrearColeccion {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
-            Document document = implementation.createDocument(null, "platos", null);
+            Document document = implementation.createDocument(null, "PLATOS", null);
             document.setXmlVersion("1.0");
 
             //Creamos cada elemento
@@ -269,6 +287,50 @@ public class CrearColeccion {
         } catch (TransformerConfigurationException e) {
             throw new RuntimeException(e);
         } catch (TransformerException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void xmlToCollection() {
+        try {
+            Class cl = Class.forName(driver);
+            Database database = (Database) cl.getDeclaredConstructor().newInstance();
+            DatabaseManager.registerDatabase(database);
+            Collection col = DatabaseManager.getCollection(URI, usu, usuPwd);
+            if (col != null) {
+                col.storeResource(crearResource("empleados.xml", ".\\src\\xmls\\empleados.xml", col));
+                col.storeResource(crearResource("almacen.xml", ".\\src\\xmls\\almacen.xml", col));
+                col.storeResource(crearResource("clientes.xml", ".\\src\\xmls\\clientes.xml", col));
+                col.storeResource(crearResource("controlconsultas.xml", ".\\src\\xmls\\controlconsultas.xml", col));
+                col.storeResource(crearResource("login.xml", ".\\src\\xmls\\login.xml", col));
+                col.storeResource(crearResource("platos.xml", ".\\src\\xmls\\platos.xml", col));
+                col.storeResource(crearResource("usuarios.xml", ".\\src\\xmls\\usuarios.xml", col));
+                col.close();
+            } else {
+                //mostrar error
+            }
+        } catch (XMLDBException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static XMLResource crearResource(String xmlNombre, String ruta, Collection col) {
+        try {
+            XMLResource res = (XMLResource) col.createResource(xmlNombre, "XMLResource");
+            File f = new File(ruta);
+            res.setContent(f);
+            return res;
+        } catch (XMLDBException e) {
             throw new RuntimeException(e);
         }
     }

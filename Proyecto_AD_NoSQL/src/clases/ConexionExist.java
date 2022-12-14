@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ConexionExist {
     static String driver = "org.exist.xmldb.DatabaseImpl"; //Driver para eXist
-    static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoPrueba"; //URI colección
+    static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD"; //URI colección
     static String usu = "admin"; //Usuario
     static String usuPwd = "admin"; //Clave
 
