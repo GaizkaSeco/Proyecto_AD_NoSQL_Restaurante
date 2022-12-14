@@ -87,7 +87,12 @@ public class PanelEmpleados extends javax.swing.JPanel {
             d[i][5] = String.valueOf(empleados.get(i).getEmail());
         }
         //se carga el modelo de la tabla
-        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };;
         table1.setModel(modelo);
         table1.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);

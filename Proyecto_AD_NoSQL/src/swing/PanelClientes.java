@@ -83,8 +83,12 @@ public class PanelClientes extends javax.swing.JPanel {
             d[i][3] = String.valueOf(clientes.get(i).getEmail());
         }
         //se carga el modelo de la tabla
-        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas);
-        table1.setModel(modelo);
+        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         table1.setModel(modelo);
         table1.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
@@ -126,107 +130,108 @@ public class PanelClientes extends javax.swing.JPanel {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
-        jScrollPane1.setViewportView(table1);
+        )
+    );
+    jScrollPane1.setViewportView(table1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 96, 690, 450));
+    add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 96, 690, 450));
 
-        anadirBoton.setBackground(new java.awt.Color(57, 57, 58));
-        anadirBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                anadirBotonMousePressed(evt);
-            }
-        });
+    anadirBoton.setBackground(new java.awt.Color(57, 57, 58));
+    anadirBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            anadirBotonMousePressed(evt);
+        }
+    });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(219, 219, 219));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("+");
+    jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+    jLabel1.setForeground(new java.awt.Color(219, 219, 219));
+    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel1.setText("+");
 
-        javax.swing.GroupLayout anadirBotonLayout = new javax.swing.GroupLayout(anadirBoton);
-        anadirBoton.setLayout(anadirBotonLayout);
-        anadirBotonLayout.setHorizontalGroup(
-            anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        anadirBotonLayout.setVerticalGroup(
-            anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout anadirBotonLayout = new javax.swing.GroupLayout(anadirBoton);
+    anadirBoton.setLayout(anadirBotonLayout);
+    anadirBotonLayout.setHorizontalGroup(
+        anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+    );
+    anadirBotonLayout.setVerticalGroup(
+        anadirBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+    );
 
-        add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, -1, 40));
+    add(anadirBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, -1, 40));
 
-        eliminarBoton.setBackground(new java.awt.Color(57, 57, 58));
-        eliminarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                eliminarBotonMousePressed(evt);
-            }
-        });
+    eliminarBoton.setBackground(new java.awt.Color(57, 57, 58));
+    eliminarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            eliminarBotonMousePressed(evt);
+        }
+    });
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(219, 219, 219));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("-");
+    jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+    jLabel2.setForeground(new java.awt.Color(219, 219, 219));
+    jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel2.setText("-");
 
-        javax.swing.GroupLayout eliminarBotonLayout = new javax.swing.GroupLayout(eliminarBoton);
-        eliminarBoton.setLayout(eliminarBotonLayout);
-        eliminarBotonLayout.setHorizontalGroup(
-            eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        eliminarBotonLayout.setVerticalGroup(
-            eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarBotonLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+    javax.swing.GroupLayout eliminarBotonLayout = new javax.swing.GroupLayout(eliminarBoton);
+    eliminarBoton.setLayout(eliminarBotonLayout);
+    eliminarBotonLayout.setHorizontalGroup(
+        eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+    );
+    eliminarBotonLayout.setVerticalGroup(
+        eliminarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(eliminarBotonLayout.createSequentialGroup()
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
+            .addContainerGap())
+    );
 
-        add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, 40));
+    add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, 40));
 
-        editarBoton.setBackground(new java.awt.Color(57, 57, 58));
-        editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                editarBotonMousePressed(evt);
-            }
-        });
+    editarBoton.setBackground(new java.awt.Color(57, 57, 58));
+    editarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mousePressed(java.awt.event.MouseEvent evt) {
+            editarBotonMousePressed(evt);
+        }
+    });
 
-        jLabel3.setForeground(new java.awt.Color(219, 219, 219));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Editar");
+    jLabel3.setForeground(new java.awt.Color(219, 219, 219));
+    jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel3.setText("Editar");
 
-        javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
-        editarBoton.setLayout(editarBotonLayout);
-        editarBotonLayout.setHorizontalGroup(
-            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-        );
-        editarBotonLayout.setVerticalGroup(
-            editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout editarBotonLayout = new javax.swing.GroupLayout(editarBoton);
+    editarBoton.setLayout(editarBotonLayout);
+    editarBotonLayout.setHorizontalGroup(
+        editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+    );
+    editarBotonLayout.setVerticalGroup(
+        editarBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+    );
 
-        add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, -1, 40));
+    add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, -1, 40));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("GESTION DE LOS CLIENTES");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 830, 30));
+    jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+    jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+    jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel4.setText("GESTION DE LOS CLIENTES");
+    add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 830, 30));
 
-        buscadorField.setBackground(new java.awt.Color(204, 204, 204));
-        buscadorField.setBorder(null);
-        buscadorField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                buscadorFieldKeyReleased(evt);
-            }
-        });
-        add(buscadorField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 180, 20));
+    buscadorField.setBackground(new java.awt.Color(204, 204, 204));
+    buscadorField.setBorder(null);
+    buscadorField.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            buscadorFieldKeyReleased(evt);
+        }
+    });
+    add(buscadorField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 180, 20));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Buscar:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, 20));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
+    jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+    jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+    jLabel5.setText("Buscar:");
+    add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, 20));
+    add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed

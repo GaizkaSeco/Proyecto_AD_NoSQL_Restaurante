@@ -259,7 +259,7 @@ public class CrearColeccion {
             crearElemento("IDUSUARIO", "0", registro, document);
             crearElemento("USUARIO", "prueba", registro, document);
             crearElemento("FECHA", new Date().toString(), registro, document);
-            crearElemento("SENTECIA", "PRUEBA", registro, document);
+            crearElemento("SENTENCIA", "PRUEBA", registro, document);
 
             Source source = new DOMSource(document);
             Result result = new StreamResult(new java.io.File(".\\src\\xmls\\controlconsultas.xml"));

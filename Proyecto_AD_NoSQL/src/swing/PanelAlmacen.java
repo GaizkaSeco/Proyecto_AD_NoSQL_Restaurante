@@ -81,7 +81,12 @@ public class PanelAlmacen extends javax.swing.JPanel {
             d[i][2] = String.valueOf(productos.get(i).getCantidad());
         }
         //se carga el modelo de la tabla
-        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };;
         table1.setModel(modelo);
         table1.setModel(modelo);
         table1.setAutoCreateRowSorter(true);

@@ -83,7 +83,12 @@ public class PanelPlatos extends javax.swing.JPanel {
             d[i][4] = String.valueOf(platos.get(i).getCategoria());
         }
         //se carga el modelo de la tabla
-        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas);
+        DefaultTableModel modelo = new DefaultTableModel(d, nombreColumnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };;
         table1.setModel(modelo);
         table1.setAutoCreateRowSorter(true);
         sorter = new TableRowSorter<>(modelo);
@@ -106,8 +111,6 @@ public class PanelPlatos extends javax.swing.JPanel {
         eliminarBoton = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         buscadorField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -188,14 +191,6 @@ public class PanelPlatos extends javax.swing.JPanel {
         jLabel4.setText("GESTION DE LOS PLATOS");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 830, 30));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Menu aleatorio");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 40));
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, 100, 40));
-
         buscadorField.setBackground(new java.awt.Color(204, 204, 204));
         buscadorField.setBorder(null);
         buscadorField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -244,10 +239,8 @@ public class PanelPlatos extends javax.swing.JPanel {
     private javax.swing.JPanel eliminarBoton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable table1;

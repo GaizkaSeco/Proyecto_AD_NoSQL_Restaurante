@@ -8,6 +8,7 @@ import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
+import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.StringReader;
@@ -495,7 +496,7 @@ public class ConexionExist {
                         "<IDUSUARIO>" + user.getId() + "</IDUSUARIO>" +
                         "<USUARIO>" + user.getNombre() + "</USUARIO>" +
                         "<FECHA>" + new Date() + "</FECHA>" +
-                        "<SENTECIA>" + sentencia + "</SENTECIA>" +
+                        "<SENTENCIA>" + sentencia + "</SENTENCIA>" +
                         "</REGISTRO>";
 
                 //insertar el registro de login
@@ -507,5 +508,75 @@ public class ConexionExist {
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
         }
+    }
+
+    public List<InicioSesion> cargarInicioSesiones() {
+        Collection col = conectar();
+        List<InicioSesion> sesiones = new ArrayList<>();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $sesion in /LOGINS/REGISTRO return $sesion");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "No hay registro de inicio de sesion.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    InicioSesion sesion = new InicioSesion(Integer.parseInt(root.getChildren("ID").get(0).getValue()), Integer.parseInt(root.getChildren("IDUSUARIO").get(0).getText()), root.getChildren("USUARIO").get(0).getText(), root.getChildren("FECHA").get(0).getText());
+                    sesiones.add(sesion);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return sesiones;
+    }
+
+    public List<ControlConsultas> cargarControlConsultas() {
+        Collection col = conectar();
+        List<ControlConsultas> consultas = new ArrayList<>();
+        if (col != null) {
+            try {
+                XPathQueryService servicio;
+                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+                //Preparamos la consulta
+                ResourceSet result = servicio.query("for $registro in /REGISTROS/REGISTRO return $registro");
+                // recorrer los datos del recurso.
+                ResourceIterator i = result.getIterator();
+                if (!i.hasMoreResources()) {
+                    JOptionPane.showMessageDialog(null, "No hay registro de operaciones de consultas.");
+                }
+                while (i.hasMoreResources()) {
+                    Resource r = i.nextResource();
+                    String campo = (String) r.getContent();
+                    SAXBuilder saxBuilder = new SAXBuilder();
+                    Document document = saxBuilder.build(new StringReader(campo));
+                    Element root = document.getRootElement();
+                    ControlConsultas registro = new ControlConsultas(root.getChildren("USUARIO").get(0).getValue(), root.getChildren("FECHA").get(0).getText(), root.getChildren("SENTENCIA").get(0).getText());
+                    consultas.add(registro);
+                }
+                col.close();
+            } catch (XMLDBException e) {
+                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
+            } catch (IOException | JDOMException e) {
+                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+        }
+        return consultas;
     }
 }

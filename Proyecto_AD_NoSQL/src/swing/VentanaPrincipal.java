@@ -45,7 +45,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonEmpleados = new javax.swing.JPanel();
         bordePiezas = new javax.swing.JPanel();
         labelPiezas = new javax.swing.JLabel();
-        botonAyuda = new javax.swing.JPanel();
+        botonLogs = new javax.swing.JPanel();
         bordeAyuda = new javax.swing.JPanel();
         labelAyuda = new javax.swing.JLabel();
         botonAlmacen = new javax.swing.JPanel();
@@ -203,10 +203,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelMenu.add(botonEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, -1));
 
-        botonAyuda.setBackground(new java.awt.Color(57, 57, 58));
-        botonAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonLogs.setBackground(new java.awt.Color(57, 57, 58));
+        botonLogs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                botonAyudaMousePressed(evt);
+                botonLogsMousePressed(evt);
             }
         });
 
@@ -227,28 +227,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         labelAyuda.setBackground(new java.awt.Color(219, 219, 219));
         labelAyuda.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         labelAyuda.setForeground(new java.awt.Color(219, 219, 219));
-        labelAyuda.setText("Expostar datos");
+        labelAyuda.setText("Logs");
 
-        javax.swing.GroupLayout botonAyudaLayout = new javax.swing.GroupLayout(botonAyuda);
-        botonAyuda.setLayout(botonAyudaLayout);
-        botonAyudaLayout.setHorizontalGroup(
-            botonAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonAyudaLayout.createSequentialGroup()
+        javax.swing.GroupLayout botonLogsLayout = new javax.swing.GroupLayout(botonLogs);
+        botonLogs.setLayout(botonLogsLayout);
+        botonLogsLayout.setHorizontalGroup(
+            botonLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonLogsLayout.createSequentialGroup()
                 .addComponent(bordeAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelAyuda)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
-        botonAyudaLayout.setVerticalGroup(
-            botonAyudaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        botonLogsLayout.setVerticalGroup(
+            botonLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bordeAyuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonAyudaLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonLogsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelAyuda)
                 .addGap(16, 16, 16))
         );
 
-        panelMenu.add(botonAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, -1));
+        panelMenu.add(botonLogs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, -1));
 
         botonAlmacen.setBackground(new java.awt.Color(57, 57, 58));
         botonAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -367,7 +367,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void botonPlatosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonPlatosMousePressed
         setColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
-        resetColor(botonAyuda, bordeAyuda, labelAyuda);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
@@ -384,7 +384,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void botonEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEmpleadosMousePressed
         setColor(botonEmpleados, bordePiezas, labelPiezas);
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
-        resetColor(botonAyuda, bordeAyuda, labelAyuda);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
@@ -398,27 +398,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         content.repaint();
     }//GEN-LAST:event_botonEmpleadosMousePressed
 
-    private void botonAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAyudaMousePressed
-        setColor(botonAyuda, bordeAyuda, labelAyuda);
+    private void botonLogsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLogsMousePressed
+        setColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonEmpleados,bordePiezas, labelPiezas);
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos);
         
-        /*PanelAyuda frame = new PanelAyuda();
+        PanelLogs frame = new PanelLogs();
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
-        content.repaint();*/
-    }//GEN-LAST:event_botonAyudaMousePressed
+        content.repaint();
+    }//GEN-LAST:event_botonLogsMousePressed
 
     private void botonSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMousePressed
         setColor(botonSalir, bordeSalir,labelSalir );
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
-        resetColor(botonAyuda, bordeAyuda, labelAyuda);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
@@ -429,7 +429,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void botonAlmacenMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAlmacenMousePressed
         setColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
-        resetColor(botonAyuda, bordeAyuda, labelAyuda);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonClientes, bordeProyectos, labelProyectos);        
@@ -447,7 +447,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setColor(botonClientes, bordeProyectos, labelProyectos);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
-        resetColor(botonAyuda, bordeAyuda, labelAyuda);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonPlatos, bordeProveedor, labelProveedores);
         resetColor(botonSalir, bordeSalir, labelSalir);
         
@@ -499,7 +499,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.botonSalir = boton1;
         this.botonPlatos = boton2;
         this.botonEmpleados = boton3;
-        this.botonAyuda = boton4;
+        this.botonLogs = boton4;
         this.labelSalir = labelBoton1;
         this.labelPiezas = labelBoton2;
         this.labelAyuda = labelBoton3;
@@ -526,9 +526,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel bordeProyectos;
     private javax.swing.JPanel bordeSalir;
     private javax.swing.JPanel botonAlmacen;
-    private javax.swing.JPanel botonAyuda;
     private javax.swing.JPanel botonClientes;
     private javax.swing.JPanel botonEmpleados;
+    private javax.swing.JPanel botonLogs;
     private javax.swing.JPanel botonPlatos;
     private javax.swing.JPanel botonSalir;
     private javax.swing.JPanel content;
