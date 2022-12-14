@@ -470,7 +470,6 @@ public class ConexionExist {
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");
-                e.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
@@ -504,7 +503,6 @@ public class ConexionExist {
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");
-                e.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");

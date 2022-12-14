@@ -8,6 +8,7 @@ import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,17 +46,13 @@ public class CrearColeccion {
             parent.close();
             URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD";
         } catch (XMLDBException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
+        } catch (ClassNotFoundException | InvocationTargetException | InstantiationException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar la base de datos.");
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "No tienes permisos sobre la base de datos.");
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar el metodo para conectarse a al base de datos.");
         }
         xmlToCollection();
     }
@@ -89,11 +86,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -123,11 +118,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -155,11 +148,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -188,11 +179,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -219,11 +208,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -250,11 +237,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -283,11 +268,9 @@ public class CrearColeccion {
             Result console = new StreamResult(System.out);
             transformer.transform(source, console);
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
         }
     }
 
@@ -307,32 +290,30 @@ public class CrearColeccion {
                 col.storeResource(crearResource("usuarios.xml", ".\\src\\xmls\\usuarios.xml", col));
                 col.close();
             } else {
-                //mostrar error
+                JOptionPane.showMessageDialog(null, "ERROR al conectarse con la BD.");
             }
         } catch (XMLDBException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
+        } catch (ClassNotFoundException | InvocationTargetException | InstantiationException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar la base de datos.");
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "No tienes permisos sobre la base de datos.");
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar el metodo para conectarse a al base de datos.");
         }
     }
 
     static XMLResource crearResource(String xmlNombre, String ruta, Collection col) {
+        XMLResource res = null;
         try {
-            XMLResource res = (XMLResource) col.createResource(xmlNombre, "XMLResource");
+            res = (XMLResource) col.createResource(xmlNombre, "XMLResource");
             File f = new File(ruta);
             res.setContent(f);
-            return res;
+
         } catch (XMLDBException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR no se a podido conectar con la base de datos.");
         }
+        return res;
     }
 
     static void crearElemento(String datoPlato, String valor, Element raiz, Document document) {
