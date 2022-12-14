@@ -33,6 +33,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        imagenLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -50,6 +51,9 @@ public class VentanaLogin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setToolTipText("");
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        imagenLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logoredondopequeño.PNG"))); // NOI18N
+        jPanel1.add(imagenLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 360, 350));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 500));
@@ -151,6 +155,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonIniciar;
     private javax.swing.JPasswordField contrasenaField;
+    private javax.swing.JLabel imagenLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

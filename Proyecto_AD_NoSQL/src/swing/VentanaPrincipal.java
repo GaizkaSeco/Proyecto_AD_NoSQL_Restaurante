@@ -22,7 +22,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.user = user;
         
-        PanelPlatos frame = new PanelPlatos(this.content);
+        PanelHome frame = new PanelHome();
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -39,9 +39,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonSalir = new javax.swing.JPanel();
         bordeSalir = new javax.swing.JPanel();
         labelSalir = new javax.swing.JLabel();
-        botonPlatos = new javax.swing.JPanel();
-        labelProveedores = new javax.swing.JLabel();
-        bordeProveedor = new javax.swing.JPanel();
+        botonHome = new javax.swing.JPanel();
+        labelHome = new javax.swing.JLabel();
+        bordeHome = new javax.swing.JPanel();
         botonEmpleados = new javax.swing.JPanel();
         bordePiezas = new javax.swing.JPanel();
         labelPiezas = new javax.swing.JLabel();
@@ -54,6 +54,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonClientes = new javax.swing.JPanel();
         bordeProyectos = new javax.swing.JPanel();
         labelProyectos = new javax.swing.JLabel();
+        botonPlatos1 = new javax.swing.JPanel();
+        labelPlatos = new javax.swing.JLabel();
+        bordePlatos1 = new javax.swing.JPanel();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,51 +113,51 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelMenu.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 170, -1));
 
-        botonPlatos.setBackground(new java.awt.Color(184, 184, 184));
-        botonPlatos.addMouseListener(new java.awt.event.MouseAdapter() {
+        botonHome.setBackground(new java.awt.Color(184, 184, 184));
+        botonHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                botonPlatosMousePressed(evt);
+                botonHomeMousePressed(evt);
             }
         });
 
-        labelProveedores.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        labelProveedores.setForeground(new java.awt.Color(0, 0, 0));
-        labelProveedores.setText("Platos");
+        labelHome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelHome.setForeground(new java.awt.Color(0, 0, 0));
+        labelHome.setText("Home");
 
-        bordeProveedor.setBackground(new java.awt.Color(255, 255, 255));
-        bordeProveedor.setPreferredSize(new java.awt.Dimension(5, 0));
+        bordeHome.setBackground(new java.awt.Color(255, 255, 255));
+        bordeHome.setPreferredSize(new java.awt.Dimension(5, 0));
 
-        javax.swing.GroupLayout bordeProveedorLayout = new javax.swing.GroupLayout(bordeProveedor);
-        bordeProveedor.setLayout(bordeProveedorLayout);
-        bordeProveedorLayout.setHorizontalGroup(
-            bordeProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout bordeHomeLayout = new javax.swing.GroupLayout(bordeHome);
+        bordeHome.setLayout(bordeHomeLayout);
+        bordeHomeLayout.setHorizontalGroup(
+            bordeHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 5, Short.MAX_VALUE)
         );
-        bordeProveedorLayout.setVerticalGroup(
-            bordeProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        bordeHomeLayout.setVerticalGroup(
+            bordeHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout botonPlatosLayout = new javax.swing.GroupLayout(botonPlatos);
-        botonPlatos.setLayout(botonPlatosLayout);
-        botonPlatosLayout.setHorizontalGroup(
-            botonPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonPlatosLayout.createSequentialGroup()
-                .addComponent(bordeProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout botonHomeLayout = new javax.swing.GroupLayout(botonHome);
+        botonHome.setLayout(botonHomeLayout);
+        botonHomeLayout.setHorizontalGroup(
+            botonHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonHomeLayout.createSequentialGroup()
+                .addComponent(bordeHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(labelProveedores)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addComponent(labelHome)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
-        botonPlatosLayout.setVerticalGroup(
-            botonPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botonPlatosLayout.createSequentialGroup()
+        botonHomeLayout.setVerticalGroup(
+            botonHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonHomeLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(labelProveedores)
+                .addComponent(labelHome)
                 .addContainerGap(18, Short.MAX_VALUE))
-            .addComponent(bordeProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+            .addComponent(bordeHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
         );
 
-        panelMenu.add(botonPlatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, -1));
+        panelMenu.add(botonHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 170, -1));
 
         botonEmpleados.setBackground(new java.awt.Color(57, 57, 58));
         botonEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -344,6 +347,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelMenu.add(botonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 50));
 
+        botonPlatos1.setBackground(new java.awt.Color(57, 57, 58));
+        botonPlatos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonPlatos1MousePressed(evt);
+            }
+        });
+
+        labelPlatos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelPlatos.setForeground(new java.awt.Color(219, 219, 219));
+        labelPlatos.setText("Platos");
+
+        bordePlatos1.setBackground(new java.awt.Color(57, 57, 58));
+        bordePlatos1.setPreferredSize(new java.awt.Dimension(5, 0));
+
+        javax.swing.GroupLayout bordePlatos1Layout = new javax.swing.GroupLayout(bordePlatos1);
+        bordePlatos1.setLayout(bordePlatos1Layout);
+        bordePlatos1Layout.setHorizontalGroup(
+            bordePlatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+        bordePlatos1Layout.setVerticalGroup(
+            bordePlatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout botonPlatos1Layout = new javax.swing.GroupLayout(botonPlatos1);
+        botonPlatos1.setLayout(botonPlatos1Layout);
+        botonPlatos1Layout.setHorizontalGroup(
+            botonPlatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonPlatos1Layout.createSequentialGroup()
+                .addComponent(bordePlatos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelPlatos)
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+        botonPlatos1Layout.setVerticalGroup(
+            botonPlatos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonPlatos1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(labelPlatos)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(bordePlatos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(botonPlatos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 170, -1));
+
         getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 550));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
@@ -364,30 +413,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Accion de los botones para cambiar de color ar clickar etc
-    private void botonPlatosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonPlatosMousePressed
-        setColor(botonPlatos, bordeProveedor, labelProveedores);
+    private void botonHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonHomeMousePressed
+        setColor(botonHome, bordeHome, labelHome);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
         resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
-        PanelPlatos frame = new PanelPlatos(this.content);
+        PanelHome frame = new PanelHome();
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
         content.add(frame, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }//GEN-LAST:event_botonPlatosMousePressed
+    }//GEN-LAST:event_botonHomeMousePressed
 
     private void botonEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEmpleadosMousePressed
         setColor(botonEmpleados, bordePiezas, labelPiezas);
-        resetColor(botonPlatos, bordeProveedor, labelProveedores);
+        resetColor(botonHome, bordeHome, labelHome);
         resetColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
         PanelEmpleados frame = new PanelEmpleados(this.content, user);
         frame.setSize(830,550);
@@ -401,10 +452,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void botonLogsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLogsMousePressed
         setColor(botonLogs, bordeAyuda, labelAyuda);
         resetColor(botonEmpleados,bordePiezas, labelPiezas);
-        resetColor(botonPlatos, bordeProveedor, labelProveedores);
+        resetColor(botonHome, bordeHome, labelHome);
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos);
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
         PanelLogs frame = new PanelLogs();
         frame.setSize(830,550);
@@ -419,9 +471,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setColor(botonSalir, bordeSalir,labelSalir );
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
         resetColor(botonLogs, bordeAyuda, labelAyuda);
-        resetColor(botonPlatos, bordeProveedor, labelProveedores);
+        resetColor(botonHome, bordeHome, labelHome);
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
         this.dispose();
     }//GEN-LAST:event_botonSalirMousePressed
@@ -430,9 +483,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
         resetColor(botonLogs, bordeAyuda, labelAyuda);
-        resetColor(botonPlatos, bordeProveedor, labelProveedores);
+        resetColor(botonHome, bordeHome, labelHome);
         resetColor(botonSalir, bordeSalir, labelSalir);
-        resetColor(botonClientes, bordeProyectos, labelProyectos);        
+        resetColor(botonClientes, bordeProyectos, labelProyectos); 
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
         PanelAlmacen frame = new PanelAlmacen(this.content);
         frame.setSize(830,550);
@@ -448,8 +502,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonAlmacen, bordeGestion, labelGestion);
         resetColor(botonEmpleados, bordePiezas, labelPiezas);
         resetColor(botonLogs, bordeAyuda, labelAyuda);
-        resetColor(botonPlatos, bordeProveedor, labelProveedores);
+        resetColor(botonHome, bordeHome, labelHome);
         resetColor(botonSalir, bordeSalir, labelSalir);
+        resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
         PanelClientes frame = new PanelClientes(this.content);
         frame.setSize(830,550);
@@ -459,6 +514,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_botonClientesMousePressed
+
+    private void botonPlatos1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonPlatos1MousePressed
+        setColor(botonPlatos1, bordePlatos1, labelPlatos);
+        resetColor(botonAlmacen, bordeGestion, labelGestion);
+        resetColor(botonEmpleados, bordePiezas, labelPiezas);
+        resetColor(botonLogs, bordeAyuda, labelAyuda);
+        resetColor(botonHome, bordeHome, labelHome);
+        resetColor(botonSalir, bordeSalir, labelSalir);
+        resetColor(botonClientes, bordeProyectos, labelProyectos);
+        
+        PanelPlatos frame = new PanelPlatos(this.content);
+        frame.setSize(830,550);
+        frame.setLocation(0,0);
+        content.removeAll();
+        content.add(frame, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_botonPlatos1MousePressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -497,7 +570,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     public VentanaPrincipal(JPanel boton1, JPanel boton2, JPanel boton3, JPanel boton4, JPanel boton5, JLabel labelBoton1, JLabel labelBoton2, JLabel labelBoton3, JLabel labelBoton4, JLabel labelBoton5, JPanel panelMenu) throws HeadlessException {
         this.botonSalir = boton1;
-        this.botonPlatos = boton2;
+        this.botonHome = boton2;
         this.botonEmpleados = boton3;
         this.botonLogs = boton4;
         this.labelSalir = labelBoton1;
@@ -521,21 +594,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bordeAyuda;
     private javax.swing.JPanel bordeGestion;
+    private javax.swing.JPanel bordeHome;
     private javax.swing.JPanel bordePiezas;
-    private javax.swing.JPanel bordeProveedor;
+    private javax.swing.JPanel bordePlatos1;
     private javax.swing.JPanel bordeProyectos;
     private javax.swing.JPanel bordeSalir;
     private javax.swing.JPanel botonAlmacen;
     private javax.swing.JPanel botonClientes;
     private javax.swing.JPanel botonEmpleados;
+    private javax.swing.JPanel botonHome;
     private javax.swing.JPanel botonLogs;
-    private javax.swing.JPanel botonPlatos;
+    private javax.swing.JPanel botonPlatos1;
     private javax.swing.JPanel botonSalir;
     private javax.swing.JPanel content;
     private javax.swing.JLabel labelAyuda;
     private javax.swing.JLabel labelGestion;
+    private javax.swing.JLabel labelHome;
     private javax.swing.JLabel labelPiezas;
-    private javax.swing.JLabel labelProveedores;
+    private javax.swing.JLabel labelPlatos;
     private javax.swing.JLabel labelProyectos;
     private javax.swing.JLabel labelSalir;
     private javax.swing.JPanel panelMenu;

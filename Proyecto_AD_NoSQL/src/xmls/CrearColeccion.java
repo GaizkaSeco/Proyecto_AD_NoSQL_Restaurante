@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class CrearColeccion {
     static String driver = "org.exist.xmldb.DatabaseImpl"; //Driver para eXist
-    static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/"; //URI
+    static String URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db"; //URI
     static String usu = "admin"; //Usuario
     static String usuPwd = "admin"; //Clave
 
@@ -41,10 +41,10 @@ public class CrearColeccion {
 
             Collection parent = DatabaseManager.getCollection(URI, usu, usuPwd);
             CollectionManagementService mgt = (CollectionManagementService) parent.getService("CollectionManagementService", "1.0");
-            Collection col = mgt.createCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD");
+            Collection col = mgt.createCollection(URI + "/ProyectoAD");
             col.close();
             parent.close();
-            URI = "xmldb:exist://localhost:8080/exist/xmlrpc/db/ProyectoAD";
+            URI = URI + "/ProyectoAD";
         } catch (XMLDBException e) {
             JOptionPane.showMessageDialog(null, "Error al instanciar la BD.");
         } catch (ClassNotFoundException | InvocationTargetException | InstantiationException e) {
@@ -289,6 +289,7 @@ public class CrearColeccion {
                 col.storeResource(crearResource("platos.xml", ".\\src\\xmls\\platos.xml", col));
                 col.storeResource(crearResource("usuarios.xml", ".\\src\\xmls\\usuarios.xml", col));
                 col.close();
+                JOptionPane.showMessageDialog(null, "Los XML y la coleccion se han creado correctamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR al conectarse con la BD.");
             }

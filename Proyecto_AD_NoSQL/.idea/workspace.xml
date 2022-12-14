@@ -92,8 +92,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.VentanaLogin" />
-        <item itemvalue="Application.CrearColeccion" />
         <item itemvalue="Application.VentanaPrincipal" />
+        <item itemvalue="Application.CrearColeccion" />
       </list>
     </recent_temporary>
   </component>
@@ -116,7 +116,8 @@
       <workItem from="1670871723129" duration="1178000" />
       <workItem from="1670875436523" duration="1072000" />
       <workItem from="1670962596231" duration="1900000" />
-      <workItem from="1671009788011" duration="10156000" />
+      <workItem from="1671009788011" duration="17056000" />
+      <workItem from="1671036287111" duration="1024000" />
     </task>
     <servers />
   </component>
