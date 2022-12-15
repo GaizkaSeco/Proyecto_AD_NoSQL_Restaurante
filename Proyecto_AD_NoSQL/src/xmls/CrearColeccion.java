@@ -1,5 +1,6 @@
 package xmls;
 
+import clases.ControlConsultas;
 import org.w3c.dom.*;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -15,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
@@ -375,32 +376,15 @@ public class CrearColeccion {
 
     public static void crearControlConsultas() {
         try {
-            //creamos el documento con DOM
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            DOMImplementation implementation = builder.getDOMImplementation();
-            Document document = implementation.createDocument(null, "REGISTROS", null);
-            document.setXmlVersion("1.0");
-
-            //Creamos cada elemento
-            Element registro = document.createElement("REGISTRO");
-            document.getDocumentElement().appendChild(registro);
-            crearElemento("ID", "0", registro, document);
-            crearElemento("IDUSUARIO", "0", registro, document);
-            crearElemento("USUARIO", "prueba", registro, document);
-            crearElemento("FECHA", new Date().toString(), registro, document);
-            crearElemento("SENTENCIA", "PRUEBA", registro, document);
-
-            Source source = new DOMSource(document);
-            Result result = new StreamResult(new File(".\\src\\xmls\\controlconsultas.xml"));
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(source, result);
-            Result console = new StreamResult(System.out);
-            transformer.transform(source, console);
-        } catch (ParserConfigurationException e) {
-            JOptionPane.showMessageDialog(null, "ERROR al pasar datos");
-        } catch (TransformerException e) {
-            JOptionPane.showMessageDialog(null, "ERROR al cargar los datos de los xml");
+            File file = new File(".\\src\\dats\\consultas.dat");
+            FileOutputStream fileo = new FileOutputStream(file);
+            ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
+            fileobj.writeObject(new ControlConsultas("Prueba", new Date().toString(), "Prueba"));
+            fileobj.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -449,15 +433,15 @@ public class CrearColeccion {
         return res;
     }
 
-    static void crearElemento(String datoPlato, String valor, Element raiz, Document document) {
-        Element elem = document.createElement(datoPlato);
+    static void crearElemento(String dato, String valor, Element raiz, Document document) {
+        Element elem = document.createElement(dato);
         Text text = document.createTextNode(valor);
         raiz.appendChild(elem);
         elem.appendChild(text);
     }
 
-    static void crearAtributo(String datoPlato, String valor, Element raiz, Document document) {
-        Attr atribute = document.createAttribute(datoPlato);
+    static void crearAtributo(String dato, String valor, Element raiz, Document document) {
+        Attr atribute = document.createAttribute(dato);
         Text text = document.createTextNode(valor);
         raiz.setAttributeNode(atribute);
         atribute.appendChild(text);

@@ -6,10 +6,11 @@ package swing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
-import javax.swing.JTable;
+import javax.naming.ldap.Control;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -83,7 +84,7 @@ public class PanelLogs extends javax.swing.JPanel {
 
     public void cargarDatosConsultas() {
         consultas.clear();
-        consultas = conexion.cargarControlConsultas();
+        cargarControlConsultas();
     }
 
     public void modificarTablaSesion() {
@@ -105,9 +106,6 @@ public class PanelLogs extends javax.swing.JPanel {
             }
         };;
         tableSesion.setModel(modelo);
-        /*tableSesion.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        tableSesion.setRowSorter(sorter);*/
     }
 
     public void modificarTablaConsultas() {
@@ -128,9 +126,27 @@ public class PanelLogs extends javax.swing.JPanel {
             }
         };;
         tableConsultas.setModel(modelo);
-        /*tableSesion.setAutoCreateRowSorter(true);
-        sorter = new TableRowSorter<>(modelo);
-        tableSesion.setRowSorter(sorter);*/
+    }
+
+    public void cargarControlConsultas() {
+        try {
+            File file = new File(".\\src\\dats\\consultas.dat");
+            FileInputStream filein = new FileInputStream(file);
+            ObjectInputStream fileobj = new ObjectInputStream(filein);
+            ControlConsultas control;
+            while ((control = (ControlConsultas) fileobj.readObject()) != null) {
+                consultas.add(control);
+            }
+            fileobj.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de consultas.");
+        } catch (EOFException e) {
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "ERROR inesperado intentalo mas tarde.");
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar la clase paara crear el objeto.");
+        }
     }
 
     /**

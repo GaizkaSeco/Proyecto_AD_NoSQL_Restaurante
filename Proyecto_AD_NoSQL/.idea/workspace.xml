@@ -119,11 +119,21 @@
       <workItem from="1671009788011" duration="17056000" />
       <workItem from="1671036287111" duration="4226000" />
       <workItem from="1671057755903" duration="676000" />
-      <workItem from="1671125457494" duration="3456000" />
+      <workItem from="1671125457494" duration="7122000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.EOFException" package="java.io" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

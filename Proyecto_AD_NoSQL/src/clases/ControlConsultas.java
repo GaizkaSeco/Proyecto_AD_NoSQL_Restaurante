@@ -1,6 +1,9 @@
 package clases;
 
-public class ControlConsultas {
+import javax.crypto.SecretKey;
+import java.io.Serializable;
+
+public class ControlConsultas implements Serializable {
     String usuario;
     String fecha;
     String sentecia;

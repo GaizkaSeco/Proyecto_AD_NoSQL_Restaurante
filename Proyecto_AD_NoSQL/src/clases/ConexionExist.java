@@ -8,9 +8,9 @@ import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
+import javax.naming.ldap.Control;
 import javax.swing.*;
-import java.io.IOException;
-import java.io.StringReader;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -241,6 +241,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevoemp + " into /EMPLEADOS";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(),sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 registroCambios(user, sentencia);
@@ -554,38 +555,17 @@ public class ConexionExist {
         return sesiones;
     }
 
-    public List<ControlConsultas> cargarControlConsultas() {
-        Collection col = conectar();
-        List<ControlConsultas> consultas = new ArrayList<>();
-        if (col != null) {
-            try {
-                XPathQueryService servicio;
-                servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                //Preparamos la consulta
-                ResourceSet result = servicio.query("for $registro in /REGISTROS/REGISTRO return $registro");
-                // recorrer los datos del recurso.
-                ResourceIterator i = result.getIterator();
-                if (!i.hasMoreResources()) {
-                    JOptionPane.showMessageDialog(null, "No hay registro de operaciones de consultas.");
-                }
-                while (i.hasMoreResources()) {
-                    Resource r = i.nextResource();
-                    String campo = (String) r.getContent();
-                    SAXBuilder saxBuilder = new SAXBuilder();
-                    Document document = saxBuilder.build(new StringReader(campo));
-                    Element root = document.getRootElement();
-                    ControlConsultas registro = new ControlConsultas(root.getChildren("USUARIO").get(0).getValue(), root.getChildren("FECHA").get(0).getText(), root.getChildren("SENTENCIA").get(0).getText());
-                    consultas.add(registro);
-                }
-                col.close();
-            } catch (XMLDBException e) {
-                JOptionPane.showMessageDialog(null, "Error al consultar el documento.");
-            } catch (IOException | JDOMException e) {
-                JOptionPane.showMessageDialog(null, "Error intentalo de nuevo mas tarde");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR en la conexion");
+    public void guardarConsulta(ControlConsultas controlConsultas) {
+        try {
+            File file = new File(".\\src\\dats\\consultas.dat");
+            FileOutputStream fileo = new FileOutputStream(file);
+            ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
+            fileobj.writeObject(controlConsultas);
+            fileobj.close();
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de las consultas");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "ERROR inesperado intentalo mas tarde.");
         }
-        return consultas;
     }
 }
