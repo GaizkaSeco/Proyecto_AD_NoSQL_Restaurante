@@ -26,6 +26,7 @@ public class CrearColeccion {
     static String usuPwd = "admin"; //Clave
 
     public static void main(String[] args) {
+        //creacion de los xml atraves de funciones
         crearAlmacen();
         crearEmpleados();
         crearClientes();
@@ -33,6 +34,7 @@ public class CrearColeccion {
         crearUsuarios();
         crearLogin();
         crearControlConsultas();
+        //Creacion de la coleccion en exist
         try {
             Class cl = Class.forName(driver);
             Database database = (Database) cl.getDeclaredConstructor().newInstance();
@@ -54,6 +56,7 @@ public class CrearColeccion {
         } catch (NoSuchMethodException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar el metodo para conectarse a al base de datos.");
         }
+        //Traslado de los xml a la coleccion creada en exist
         xmlToCollection();
     }
 
@@ -78,6 +81,36 @@ public class CrearColeccion {
             crearAtributo("ID", "1", producto2, document);
             crearElemento("NOMBRE", "Mararrones", producto2, document);
             crearElemento("CANTIDAD", "200", producto2, document);
+
+            Element producto3 = document.createElement("PRODUCTO");
+            document.getDocumentElement().appendChild(producto3);
+            crearAtributo("ID", "2", producto3, document);
+            crearElemento("NOMBRE", "Lechuga", producto3, document);
+            crearElemento("CANTIDAD", "100", producto3, document);
+
+            Element producto4 = document.createElement("PRODUCTO");
+            document.getDocumentElement().appendChild(producto4);
+            crearAtributo("ID", "3", producto4, document);
+            crearElemento("NOMBRE", "Carne de vaca", producto4, document);
+            crearElemento("CANTIDAD", "54", producto4, document);
+
+            Element producto5 = document.createElement("PRODUCTO");
+            document.getDocumentElement().appendChild(producto5);
+            crearAtributo("ID", "4", producto5, document);
+            crearElemento("NOMBRE", "Pollos", producto5, document);
+            crearElemento("CANTIDAD", "79", producto5, document);
+
+            Element producto6 = document.createElement("PRODUCTO");
+            document.getDocumentElement().appendChild(producto6);
+            crearAtributo("ID", "5", producto6, document);
+            crearElemento("NOMBRE", "Chocholate", producto6, document);
+            crearElemento("CANTIDAD", "100", producto6, document);
+
+            Element producto7 = document.createElement("PRODUCTO");
+            document.getDocumentElement().appendChild(producto7);
+            crearAtributo("ID", "6", producto7, document);
+            crearElemento("NOMBRE", "Leche", producto7, document);
+            crearElemento("CANTIDAD", "380", producto7, document);
 
             Source source = new DOMSource(document);
             Result result = new StreamResult(new java.io.File(".\\src\\xmls\\almacen.xml"));
@@ -106,10 +139,46 @@ public class CrearColeccion {
             document.getDocumentElement().appendChild(empleado);
             crearAtributo("ID", "0", empleado, document);
             crearElemento("NOMBRE", "Gaizka", empleado, document);
-            crearElemento("SALARIO", "1000.0", empleado, document);
+            crearElemento("SALARIO", "2000.0", empleado, document);
             crearElemento("FECHACON", "12/12/2021", empleado, document);
             crearElemento("TELEFONO", "123456789", empleado, document);
-            crearElemento("EMAIL", "gaizka@gmail.com", empleado, document);
+            crearElemento("EMAIL", "gaizka@snorlax.com", empleado, document);
+
+            Element empleado2 = document.createElement("EMPLEADO");
+            document.getDocumentElement().appendChild(empleado2);
+            crearAtributo("ID", "1", empleado2, document);
+            crearElemento("NOMBRE", "Leire", empleado2, document);
+            crearElemento("SALARIO", "2000.0", empleado2, document);
+            crearElemento("FECHACON", "12/12/2021", empleado2, document);
+            crearElemento("TELEFONO", "546789987", empleado2, document);
+            crearElemento("EMAIL", "leire@snorlax.com", empleado2, document);
+
+            Element empleado3 = document.createElement("EMPLEADO");
+            document.getDocumentElement().appendChild(empleado3);
+            crearAtributo("ID", "2", empleado3, document);
+            crearElemento("NOMBRE", "Alexander", empleado3, document);
+            crearElemento("SALARIO", "1200.0", empleado3, document);
+            crearElemento("FECHACON", "12/12/2021", empleado3, document);
+            crearElemento("TELEFONO", "745896632", empleado3, document);
+            crearElemento("EMAIL", "alex@snorlax.com", empleado3, document);
+
+            Element empleado4 = document.createElement("EMPLEADO");
+            document.getDocumentElement().appendChild(empleado4);
+            crearAtributo("ID", "3", empleado4, document);
+            crearElemento("NOMBRE", "Egoitz", empleado4, document);
+            crearElemento("SALARIO", "1200.0", empleado4, document);
+            crearElemento("FECHACON", "12/12/2021", empleado4, document);
+            crearElemento("TELEFONO", "896552147", empleado4, document);
+            crearElemento("EMAIL", "egoitz@snorlax.com", empleado4, document);
+
+            Element empleado5 = document.createElement("EMPLEADO");
+            document.getDocumentElement().appendChild(empleado5);
+            crearAtributo("ID", "4", empleado5, document);
+            crearElemento("NOMBRE", "Javier", empleado5, document);
+            crearElemento("SALARIO", "1000.0", empleado5, document);
+            crearElemento("FECHACON", "12/12/2021", empleado5, document);
+            crearElemento("TELEFONO", "567432211", empleado5, document);
+            crearElemento("EMAIL", "javier@snorlax.com", empleado5, document);
 
             Source source = new DOMSource(document);
             Result result = new StreamResult(new java.io.File(".\\src\\xmls\\empleados.xml"));
@@ -138,8 +207,29 @@ public class CrearColeccion {
             document.getDocumentElement().appendChild(cliente);
             crearAtributo("ID", "0", cliente, document);
             crearElemento("NOMBRE", "Jokin", cliente, document);
-            crearElemento("TELEFONO", "987654321", cliente, document);
+            crearElemento("TELEFONO", "654890755", cliente, document);
             crearElemento("EMAIL", "jokin@gmail.com", cliente, document);
+
+            Element cliente2 = document.createElement("CLIENTE");
+            document.getDocumentElement().appendChild(cliente2);
+            crearAtributo("ID", "1", cliente2, document);
+            crearElemento("NOMBRE", "Eider", cliente2, document);
+            crearElemento("TELEFONO", "556677889", cliente2, document);
+            crearElemento("EMAIL", "eider@gmail.com", cliente2, document);
+
+            Element cliente3 = document.createElement("CLIENTE");
+            document.getDocumentElement().appendChild(cliente3);
+            crearAtributo("ID", "2", cliente3, document);
+            crearElemento("NOMBRE", "Roxana", cliente3, document);
+            crearElemento("TELEFONO", "123445432", cliente3, document);
+            crearElemento("EMAIL", "roxana@gmail.com", cliente3, document);
+
+            Element cliente4 = document.createElement("CLIENTE");
+            document.getDocumentElement().appendChild(cliente4);
+            crearAtributo("ID", "3", cliente4, document);
+            crearElemento("NOMBRE", "Ivan", cliente4, document);
+            crearElemento("TELEFONO", "526042789", cliente4, document);
+            crearElemento("EMAIL", "ivan@gmail.com", cliente4, document);
 
             Source source = new DOMSource(document);
             Result result = new StreamResult(new java.io.File(".\\src\\xmls\\clientes.xml"));
@@ -171,6 +261,46 @@ public class CrearColeccion {
             crearElemento("DESCRIPCION", "Macarrones con tomate", plato, document);
             crearElemento("PRECIO", "4.95", plato, document);
             crearElemento("CATEGORIA", "1", plato, document);
+
+            Element plato2 = document.createElement("PLATO");
+            document.getDocumentElement().appendChild(plato2);
+            crearAtributo("ID", "1", plato2, document);
+            crearElemento("NOMBRE", "Ensalada de vegetales", plato2, document);
+            crearElemento("DESCRIPCION", "Ensalada para un dia caluroso", plato2, document);
+            crearElemento("PRECIO", "4.95", plato2, document);
+            crearElemento("CATEGORIA", "1", plato2, document);
+
+            Element plato3 = document.createElement("PLATO");
+            document.getDocumentElement().appendChild(plato3);
+            crearAtributo("ID", "2", plato3, document);
+            crearElemento("NOMBRE", "Chuleton de vaca", plato3, document);
+            crearElemento("DESCRIPCION", "Rico chuleton de 2kg", plato3, document);
+            crearElemento("PRECIO", "4.95", plato3, document);
+            crearElemento("CATEGORIA", "2", plato3, document);
+
+            Element plato4 = document.createElement("PLATO");
+            document.getDocumentElement().appendChild(plato4);
+            crearAtributo("ID", "3", plato4, document);
+            crearElemento("NOMBRE", "Pollo asado con patatas", plato4, document);
+            crearElemento("DESCRIPCION", "Rico pollo asado acompañado de patatas.", plato4, document);
+            crearElemento("PRECIO", "4.95", plato4, document);
+            crearElemento("CATEGORIA", "2", plato4, document);
+
+            Element plato5 = document.createElement("PLATO");
+            document.getDocumentElement().appendChild(plato5);
+            crearAtributo("ID", "4", plato5, document);
+            crearElemento("NOMBRE", "Volcan de chocolate", plato5, document);
+            crearElemento("DESCRIPCION", "Bizcocho de chocolate relleno de chocolate.", plato5, document);
+            crearElemento("PRECIO", "4.95", plato5, document);
+            crearElemento("CATEGORIA", "3", plato5, document);
+
+            Element plato6 = document.createElement("PLATO");
+            document.getDocumentElement().appendChild(plato6);
+            crearAtributo("ID", "5", plato6, document);
+            crearElemento("NOMBRE", "Tarta de queso", plato6, document);
+            crearElemento("DESCRIPCION", "Tarta de queso de la casa.", plato6, document);
+            crearElemento("PRECIO", "4.95", plato6, document);
+            crearElemento("CATEGORIA", "3", plato6, document);
 
             Source source = new DOMSource(document);
             Result result = new StreamResult(new java.io.File(".\\src\\xmls\\platos.xml"));
@@ -262,7 +392,7 @@ public class CrearColeccion {
             crearElemento("SENTENCIA", "PRUEBA", registro, document);
 
             Source source = new DOMSource(document);
-            Result result = new StreamResult(new java.io.File(".\\src\\xmls\\controlconsultas.xml"));
+            Result result = new StreamResult(new File(".\\src\\xmls\\controlconsultas.xml"));
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
             Result console = new StreamResult(System.out);
@@ -276,10 +406,12 @@ public class CrearColeccion {
 
     static void xmlToCollection() {
         try {
+            //Nos conectamos a exist
             Class cl = Class.forName(driver);
             Database database = (Database) cl.getDeclaredConstructor().newInstance();
             DatabaseManager.registerDatabase(database);
             Collection col = DatabaseManager.getCollection(URI, usu, usuPwd);
+            //Comprobamos si se ha establecido conexion y en el caso de que sea que si añadimos los xml a la coleccion
             if (col != null) {
                 col.storeResource(crearResource("empleados.xml", ".\\src\\xmls\\empleados.xml", col));
                 col.storeResource(crearResource("almacen.xml", ".\\src\\xmls\\almacen.xml", col));

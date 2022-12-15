@@ -188,7 +188,7 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
                 content.repaint();
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Introduce valores correctos o comprueba el numero de telefono.");
+            JOptionPane.showMessageDialog(null, "Introduce valores correctos.");
         }
     }//GEN-LAST:event_botonAnadirMousePressed
 

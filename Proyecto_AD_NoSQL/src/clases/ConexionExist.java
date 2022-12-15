@@ -8,7 +8,6 @@ import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.StringReader;
@@ -26,6 +25,10 @@ public class ConexionExist {
     public ConexionExist() {
     }
 
+    /**
+     * Funcion encargada de conectarse a la bbdd
+     * @return colleccion conectada a la bbdd
+     */
     public static Collection conectar() {
         try {
             Class cl = Class.forName(driver); //Carga del driver
@@ -44,6 +47,12 @@ public class ConexionExist {
         return null;
     }
 
+    /**
+     * Comprueba que los credenciales sean correctos
+     * @param usuario el nobre de usuario que se introduzca
+     * @param contrasena la contrasena que se intoduzca
+     * @return devuelve un objeto usuario con la informacion necesaria
+     */
     public Usuario login(String usuario, String contrasena) {
         Collection col = conectar();
         if (col != null) {
@@ -496,7 +505,7 @@ public class ConexionExist {
                         "<IDUSUARIO>" + user.getId() + "</IDUSUARIO>" +
                         "<USUARIO>" + user.getNombre() + "</USUARIO>" +
                         "<FECHA>" + new Date() + "</FECHA>" +
-                        "<SENTENCIA>" + sentencia + "</SENTENCIA>" +
+                        "<SENTENCIA>'" + sentencia + "'</SENTENCIA>" +
                         "</REGISTRO>";
 
                 //insertar el registro de login

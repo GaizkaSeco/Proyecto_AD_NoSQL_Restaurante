@@ -86,7 +86,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-        };;
+        };
         table1.setModel(modelo);
         table1.setModel(modelo);
         table1.setAutoCreateRowSorter(true);
@@ -233,6 +233,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
+        //carga ventana para añadir
         PanelAnadirProducto frame = new PanelAnadirProducto(content);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -246,6 +247,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para editar debes seleccionar en la tabla.");
         } else {
+            //recoge el id del campo seleccionado y carga el panel de editar con el id cargado
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             productos.clear();
             productos = conexion.cargarProductos();
@@ -263,7 +265,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
         } else {
-            //Obtencion del id del objeto seleccionaod en la tabla
+            //Obtencion del id del objeto seleccionaod en la tabla y lo eliminar
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             conexion.eliminarProducto(id);
         }
