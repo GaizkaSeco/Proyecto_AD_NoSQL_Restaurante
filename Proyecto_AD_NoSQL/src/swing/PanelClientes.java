@@ -41,6 +41,7 @@ public class PanelClientes extends javax.swing.JPanel {
         this.content = content;
         this.user = user;
 
+        //carga el modelo de la tabla
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
         table1.setRowHeight(30);
@@ -58,6 +59,7 @@ public class PanelClientes extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fixtable(jScrollPane1);
+        //cargamos los datos a la tabla
         modificarTabla();
     }
 
@@ -238,6 +240,7 @@ public class PanelClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
+        //se llama a la ventana de nuevo cliente
         cargarDatos();
         PanelAnadirCliente frame = new PanelAnadirCliente(content, user);
         frame.setSize(830, 550);
@@ -249,6 +252,7 @@ public class PanelClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        //se comprueba que tengamos datos seleccionados en la tabla
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para editar debes seleccionar en la tabla.");
         } else {
@@ -266,6 +270,7 @@ public class PanelClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_editarBotonMousePressed
 
     private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed
+        //se comprueba que tengamos datos seleccionados en la tabla
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
         } else {

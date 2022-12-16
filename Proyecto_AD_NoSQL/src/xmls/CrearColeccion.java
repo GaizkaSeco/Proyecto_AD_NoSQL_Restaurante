@@ -1,6 +1,6 @@
 package xmls;
 
-import clases.ControlConsultas;
+import clases.ControlConsulta;
 import org.w3c.dom.*;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -376,15 +376,16 @@ public class CrearColeccion {
 
     public static void crearControlConsultas() {
         try {
+            //creamos el dat donde se van a guardar las consultas
             File file = new File(".\\src\\dats\\consultas.dat");
             FileOutputStream fileo = new FileOutputStream(file);
             ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
-            fileobj.writeObject(new ControlConsultas("Prueba", new Date().toString(), "Prueba"));
+            fileobj.writeObject(new ControlConsulta("Prueba", new Date().toString(), "Prueba"));
             fileobj.close();
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo.");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "ERROR inesperado untentalo mas tarde.");
         }
     }
 

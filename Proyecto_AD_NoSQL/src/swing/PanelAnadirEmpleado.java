@@ -170,6 +170,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        //carga la ventana anterior
         PanelEmpleados frame = new PanelEmpleados(content, user);
         frame.setSize(830, 550);
         frame.setLocation(0, 0);
@@ -181,6 +182,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
 
     private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
         try {
+            //comprueba los datos
             double salario = Double.parseDouble(salarioField.getText());
             int telefono = Integer.parseInt(telefonoField.getText());
             if (nombreField.getText().isBlank() || fechaField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
@@ -193,6 +195,7 @@ public class PanelAnadirEmpleado extends javax.swing.JPanel {
                 } else {
                     id = empleados.get(empleados.size() - 1).getId() + 1;
                 }
+                //añade el empleado
                 Empleado empNuevo = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
                 conexion.anadirEmpleado(empNuevo, user);
                 JOptionPane.showMessageDialog(null, "El empleado se ha añadido corectamente.");

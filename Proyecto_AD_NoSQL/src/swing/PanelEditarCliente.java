@@ -31,6 +31,7 @@ public class PanelEditarCliente extends javax.swing.JPanel {
         this.id = id;
         this.user = user;
 
+        //cargamos los datos del cliente en los campos para editar
         for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
                 nombreField.setText(cliente.getNombre());
@@ -157,6 +158,7 @@ public class PanelEditarCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        //carga la ventana anterior
         PanelClientes frame = new PanelClientes(content, user);
         frame.setSize(830, 550);
         frame.setLocation(0, 0);
@@ -167,14 +169,17 @@ public class PanelEditarCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        //comprueba que los datos esten bien
         try {
             int telefono = Integer.parseInt(telefonoField.getText());
             if (nombreField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
+                //edita el cliente
                 Cliente updateCli = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
                 conexion.editarCliente(updateCli, user);
                 JOptionPane.showMessageDialog(null, "El cliente se ha editado corectamente.");
+                //cargamos la ventana anterior
                 PanelClientes frame = new PanelClientes(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);

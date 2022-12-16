@@ -31,6 +31,7 @@ public class PanelEditarProducto extends javax.swing.JPanel {
         this.id = id;
         this.user = user;
 
+        //carga los datos del priducto en los campos para editar
         for (Producto producto : productos) {
             if (producto.getId() == id) {
                 nombreField.setText(producto.getProducto());
@@ -142,6 +143,7 @@ public class PanelEditarProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        //carga la ventana anaterior
         PanelAlmacen frame = new PanelAlmacen(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -152,11 +154,13 @@ public class PanelEditarProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        //comprueba que los datos sean correctos
         try {
             int cantidad = Integer.parseInt(cantidadField.getText());
             if (nombreField.getText().isBlank()){
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
+                //edita el producto
                 Producto updatePro = new Producto(id, nombreField.getText(), cantidad);
                 conexion.editarProducto(updatePro, user);
                 JOptionPane.showMessageDialog(null, "El producto se ha editado corectamente.");

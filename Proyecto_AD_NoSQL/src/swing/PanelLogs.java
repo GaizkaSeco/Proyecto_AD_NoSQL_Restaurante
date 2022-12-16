@@ -9,14 +9,12 @@ import java.awt.Component;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 import clases.ConexionExist;
-import clases.ControlConsultas;
+import clases.ControlConsulta;
 import clases.InicioSesion;
 import scrollbar.ScrollBarCustom;
 import table.TableHeader;
@@ -29,7 +27,7 @@ public class PanelLogs extends javax.swing.JPanel {
     String[] nombreColumnasSesion = {"id", "id Usuario", "Usuario", "Fecha"};
     String[] nombreColumnasConsultas = {"Usuario", "Fecha", "Sentencia"};
     List<InicioSesion> sesiones = new ArrayList<InicioSesion>();
-    List<ControlConsultas> consultas = new ArrayList<ControlConsultas>();
+    List<ControlConsulta> consultas = new ArrayList<ControlConsulta>();
     ConexionExist conexion = new ConexionExist();
 
     /**
@@ -129,12 +127,13 @@ public class PanelLogs extends javax.swing.JPanel {
     }
 
     public void cargarControlConsultas() {
+        //cargamos las consultas que hay en el dat
         try {
             File file = new File(".\\src\\dats\\consultas.dat");
             FileInputStream filein = new FileInputStream(file);
             ObjectInputStream fileobj = new ObjectInputStream(filein);
-            ControlConsultas control;
-            while ((control = (ControlConsultas) fileobj.readObject()) != null) {
+            ControlConsulta control;
+            while ((control = (ControlConsulta) fileobj.readObject()) != null) {
                 consultas.add(control);
             }
             filein.close();

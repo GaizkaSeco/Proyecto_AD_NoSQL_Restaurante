@@ -156,6 +156,7 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        //carga la ventana naterior
         PanelPlatos frame = new PanelPlatos(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -166,6 +167,7 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBotonMousePressed
 
     private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        //comprueba los datos que sean correctos
         try {
             double coste = Double.parseDouble(costeField.getText());
             if (platoField.getText().isBlank() || descripcionField.getText().isBlank()){
@@ -178,10 +180,12 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
                 } else {
                     id = platos.get(platos.size() - 1).getId() + 1;
                 }
+                //añade el plato nuevo
                 int categoria = jComboBox1.getSelectedIndex() + 1;
                 Plato platoNuevo = new Plato(id, platoField.getText(),descripcionField.getText(), coste, categoria);
                 conexion.anadirPlato(platoNuevo, user);
                 JOptionPane.showMessageDialog(null, "El plato se ha añadido corectamente.");
+                //carga la ventana de los platos
                 PanelPlatos frame = new PanelPlatos(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);

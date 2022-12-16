@@ -30,6 +30,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
         this.id = id;
         this.user = user;
 
+        //carga los datos en los campos para editar
         for (Empleado empleado : empleados) {
             if (empleado.getId() == id) {
                 nombreField.setText(empleado.getNombre());
@@ -185,6 +186,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBoton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton2MousePressed
+        //carga la ventana anterior
         PanelEmpleados frame = new PanelEmpleados(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -195,15 +197,18 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBoton2MousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        //comprueba que los datos esten bien
         try {
             double salario = Double.parseDouble(salarioField.getText());
             int telefono = Integer.parseInt(telefonoField.getText());
             if (nombreField.getText().isBlank() || fechaField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
+                //anade el empleado
                 Empleado updateEmp = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
                 conexion.editarEmpleado(updateEmp, user);
                 JOptionPane.showMessageDialog(null, "El empleado se ha editado corectamente.");
+                //carga la ventana anterior
                 PanelEmpleados frame = new PanelEmpleados(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);

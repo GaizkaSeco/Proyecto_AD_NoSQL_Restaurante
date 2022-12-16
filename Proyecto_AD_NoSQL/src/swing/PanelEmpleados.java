@@ -249,9 +249,11 @@ public class PanelEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_anadirBotonMousePressed
 
     private void editarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBotonMousePressed
+        //comprovamos que se reuperan datos en la columna
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para editar debes seleccionar en la tabla.");
         } else {
+            //se envia a la ventana de editar el empleado
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             empleados.clear();
             empleados = conexion.cargarEmpleados();
@@ -266,6 +268,7 @@ public class PanelEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_editarBotonMousePressed
 
     private void eliminarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBotonMousePressed
+        //se comprueba que tengammos dtos seleccionados
         if (table1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Para eliminar debes seleccionar en la tabla.");
         } else {

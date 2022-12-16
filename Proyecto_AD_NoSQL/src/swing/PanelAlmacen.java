@@ -37,9 +37,11 @@ public class PanelAlmacen extends javax.swing.JPanel {
      */
     public PanelAlmacen(JPanel content, Usuario user) {
         initComponents();
+        //Cargamos los datos
         this.content = content;
         this.user = user;
-        
+
+        //Le damos formato a la tabla
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
         table1.setRowHeight(30);
@@ -57,6 +59,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         fixtable(jScrollPane1);
+        //Cargamos los datos a la tabla
         modificarTabla();
     }
     

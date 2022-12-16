@@ -24,11 +24,6 @@ public class ConexionExist {
     public ConexionExist() {
     }
 
-    /**
-     * Funcion encargada de conectarse a la bbdd
-     *
-     * @return colleccion conectada a la bbdd
-     */
     public static Collection conectar() {
         try {
             Class cl = Class.forName(driver); //Carga del driver
@@ -47,13 +42,6 @@ public class ConexionExist {
         return null;
     }
 
-    /**
-     * Comprueba que los credenciales sean correctos
-     *
-     * @param usuario    el nobre de usuario que se introduzca
-     * @param contrasena la contrasena que se intoduzca
-     * @return devuelve un objeto usuario con la informacion necesaria
-     */
     public Usuario login(String usuario, String contrasena) {
         Collection col = conectar();
         if (col != null) {
@@ -228,6 +216,7 @@ public class ConexionExist {
     }
 
     public void anadirEmpleado(Empleado empNuevo, Usuario user) {
+        //Se conecta a la base de datos y preparamos el xml que vamos a insertar
         Collection col = conectar();
         String nuevoemp = "<EMPLEADO ID='" + empNuevo.getId() + "'>" +
                 "<NOMBRE>" + empNuevo.getNombre() + "</NOMBRE>" +
@@ -242,7 +231,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevoemp + " into /EMPLEADOS";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
@@ -256,6 +245,7 @@ public class ConexionExist {
     }
 
     public void anadirCliente(Cliente cliNuevo, Usuario user) {
+        //Se conecta a la base de datos y preparamos el xml que vamos a insertar
         Collection col = conectar();
         String nuevocli = "<CLIENTE ID='" + cliNuevo.getId() + "'>" +
                 "<NOMBRE>" + cliNuevo.getNombre() + "</NOMBRE>" +
@@ -268,7 +258,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevocli + " into /CLIENTES";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
@@ -282,6 +272,7 @@ public class ConexionExist {
     }
 
     public void anadirProducto(Producto proNuevo, Usuario user) {
+        //Se conecta a la base de datos y preparamos el xml que vamos a insertar
         Collection col = conectar();
         String nuevopro = "<PRODUCTO ID='" + proNuevo.getId() + "'>" +
                 "<NOMBRE>" + proNuevo.getProducto() + "</NOMBRE>" +
@@ -293,7 +284,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevopro + " into /ALMACEN";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
@@ -307,6 +298,7 @@ public class ConexionExist {
     }
 
     public void anadirPlato(Plato platoNuevo, Usuario user) {
+        //Se conecta a la base de datos y preparamos el xml que vamos a insertar
         Collection col = conectar();
         String nuevocli = "<PLATO ID='" + platoNuevo.getId() + "'>" +
                 "<NOMBRE>" + platoNuevo.getNombre() + "</NOMBRE>" +
@@ -320,7 +312,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevocli + " into /PLATOS";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
@@ -334,12 +326,13 @@ public class ConexionExist {
     }
 
     public void eliminarEmpleado(int id, Usuario user) {
+        //Se conecta a la base de datos
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 String sentencia = "update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
@@ -351,13 +344,14 @@ public class ConexionExist {
     }
 
     public void eliminarPlato(int id, Usuario user) {
+        //Se conecta a la base de datos
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un plato --> update delete
                 String sentencia = "update delete /PLATOS/PLATO[@ID='" + id + "']";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
@@ -369,13 +363,14 @@ public class ConexionExist {
     }
 
     public void eliminarCliente(int id, Usuario user) {
+        //Se conecta a la base de datos
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un cliente --> update delete
                 String sentencia = "update delete /CLIENTES/CLIENTE[@ID='" + id + "']";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
@@ -387,13 +382,14 @@ public class ConexionExist {
     }
 
     public void eliminarProducto(int id, Usuario user) {
+        //Se conecta a la base de datos
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update delete
                 String sentencia = "update delete /ALMACEN/PRODUCTO[@ID='" + id + "']";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
@@ -405,6 +401,7 @@ public class ConexionExist {
     }
 
     public void editarEmpleado(Empleado empleado, Usuario user) {
+        //Se conecta a la base de datos y prepata el xml que vamos a añadir
         Collection col = conectar();
         String updateEmp = "<EMPLEADO ID='" + empleado.getId() + "'>" +
                 "<NOMBRE>" + empleado.getNombre() + "</NOMBRE>" +
@@ -418,11 +415,11 @@ public class ConexionExist {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
                 String sentencia = "update replace /EMPLEADOS/EMPLEADO[@ID=" + empleado.getId() + "] with" + updateEmp;
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+                JOptionPane.showMessageDialog(null, "ERROR al editar el empleado.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
@@ -430,6 +427,7 @@ public class ConexionExist {
     }
 
     public void editarProducto(Producto producto, Usuario user) {
+        //Se conecta a la base de datos y prepata el xml que vamos a añadir
         Collection col = conectar();
         String updatePro = "<PRODUCTO ID='" + producto.getId() + "'>" +
                 "<NOMBRE>" + producto.getProducto() + "</NOMBRE>" +
@@ -440,11 +438,11 @@ public class ConexionExist {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
                 String sentencia = "update replace /ALMACEN/PRODUCTO[@ID=" + producto.getId() + "] with" + updatePro;
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+                JOptionPane.showMessageDialog(null, "ERROR al editar el producto.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
@@ -452,6 +450,7 @@ public class ConexionExist {
     }
 
     public void editarCliente(Cliente cliente, Usuario user) {
+        //Se conecta a la base de datos y prepata el xml que vamos a añadir
         Collection col = conectar();
         String updateCli = "<CLIENTE ID='" + cliente.getId() + "'>" +
                 "<NOMBRE>" + cliente.getNombre() + "</NOMBRE>" +
@@ -463,11 +462,11 @@ public class ConexionExist {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
                 String sentencia = "update replace /CLIENTES/CLIENTE[@ID=" + cliente.getId() + "] with" + updateCli;
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                guardarConsulta(new ControlConsulta(user.getNombre(), new Date().toString(), sentencia));
                 servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR al borrar.");
+                JOptionPane.showMessageDialog(null, "ERROR al editar el cliente.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
@@ -475,6 +474,7 @@ public class ConexionExist {
     }
 
     public void registroLogin(Usuario user) {
+        //Se conecta a la base de datos y prepata el xml que vamos a añadir
         Collection col = conectar();
         if (col != null) {
             try {
@@ -541,15 +541,15 @@ public class ConexionExist {
         return sesiones;
     }
 
-    public void guardarConsulta(ControlConsultas controlConsultas) {
+    public void guardarConsulta(ControlConsulta controlConsulta) {
         File file = new File(".\\src\\dats\\consultas.dat");
-        List<ControlConsultas> consultas = new ArrayList<>();
+        List<ControlConsulta> consultas = new ArrayList<>();
         ObjectInputStream fileobjin = null;
         try {
             FileInputStream filei = new FileInputStream(file);
             fileobjin = new ObjectInputStream(filei);
-            ControlConsultas consulta;
-            while ((consulta = (ControlConsultas) fileobjin.readObject()) != null) {
+            ControlConsulta consulta;
+            while ((consulta = (ControlConsulta) fileobjin.readObject()) != null) {
                 consultas.add(consulta);
             }
         } catch (FileNotFoundException e) {
@@ -564,9 +564,8 @@ public class ConexionExist {
         try {
             FileOutputStream fileo = new FileOutputStream(file);
             ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
-            System.out.println(consultas.size());
-            consultas.add(controlConsultas);
-            for (ControlConsultas value : consultas) {
+            consultas.add(controlConsulta);
+            for (ControlConsulta value : consultas) {
                 fileobj.writeObject(value);
             }
             fileobj.close();

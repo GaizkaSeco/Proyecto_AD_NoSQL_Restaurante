@@ -133,6 +133,7 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
+        //carga la ventana anterior
         PanelAlmacen frame = new PanelAlmacen(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -143,6 +144,7 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBotonMousePressed
 
     private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
+        //comprueba que lso datos sean correctos
         try {
             int cantidad = Integer.parseInt(cantidadField.getText());
             if (productoField.getText().isBlank()){
@@ -155,9 +157,11 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
                 } else {
                     id = productos.get(productos.size() - 1).getId() + 1;
                 }
+                //añade el producto
                 Producto proNuevo = new Producto(id, productoField.getText(), cantidad);
                 conexion.anadirProducto(proNuevo, user);
                 JOptionPane.showMessageDialog(null, "El producto se ha añadido corectamente.");
+                //carga la ventana de almacen
                 PanelAlmacen frame = new PanelAlmacen(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);

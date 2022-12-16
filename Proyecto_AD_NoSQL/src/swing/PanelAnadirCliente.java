@@ -144,6 +144,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBoton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton1MousePressed
+        //nos envia a la ventana anterior
         PanelClientes frame = new PanelClientes(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
@@ -155,6 +156,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
 
     private void botonAnadirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnadirMousePressed
         try {
+            //comprobamos que los datos esten bien.
             int telefono = Integer.parseInt(telefonoField.getText());
             if (nombreField.getText().isBlank() || emailField.getText().isBlank() || String.valueOf(telefono).length() != 9){
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
@@ -166,6 +168,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
                 } else {
                     id = clientes.get(clientes.size() - 1).getId() + 1;
                 }
+                //añade el cliente y carga la ventana de los clientes
                 Cliente cliNuevo = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
                 conexion.anadirCliente(cliNuevo, user);
                 JOptionPane.showMessageDialog(null, "El cliente se ha añadido corectamente.");
