@@ -17,6 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 import clases.ConexionExist;
 import clases.Producto;
+import clases.Usuario;
 import scrollbar.ScrollBarCustom;
 import table.TableHeader;
 
@@ -30,12 +31,14 @@ public class PanelAlmacen extends javax.swing.JPanel {
     List<Producto> productos = new ArrayList<Producto>();
     ConexionExist conexion = new ConexionExist();
     TableRowSorter<DefaultTableModel> sorter;
+    Usuario user;
     /**
      * Creates new form PanelAlmacen
      */
-    public PanelAlmacen(JPanel content) {
+    public PanelAlmacen(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
         
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
@@ -234,7 +237,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
         //carga ventana para añadir
-        PanelAnadirProducto frame = new PanelAnadirProducto(content);
+        PanelAnadirProducto frame = new PanelAnadirProducto(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -251,7 +254,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             productos.clear();
             productos = conexion.cargarProductos();
-            PanelEditarProducto frame = new PanelEditarProducto(content, productos, id);
+            PanelEditarProducto frame = new PanelEditarProducto(content, productos, id, user);
             frame.setSize(830,550);
             frame.setLocation(0,0);
             content.removeAll();

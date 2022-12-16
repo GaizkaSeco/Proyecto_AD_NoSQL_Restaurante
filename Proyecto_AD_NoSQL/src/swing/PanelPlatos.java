@@ -17,6 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 import clases.ConexionExist;
 import clases.Plato;
+import clases.Usuario;
 import table.TableHeader;
 import scrollbar.ScrollBarCustom;
 
@@ -30,12 +31,14 @@ public class PanelPlatos extends javax.swing.JPanel {
     List<Plato> platos = new ArrayList<>();
     ConexionExist conexion = new ConexionExist();
     TableRowSorter<DefaultTableModel> sorter;
+    Usuario user;
     /**
      * Creates new form PanelPlatos
      */
-    public PanelPlatos(JPanel content) {
+    public PanelPlatos(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
 
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
@@ -208,7 +211,7 @@ public class PanelPlatos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
-        PanelAnadirPlato frame = new PanelAnadirPlato(content);
+        PanelAnadirPlato frame = new PanelAnadirPlato(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();

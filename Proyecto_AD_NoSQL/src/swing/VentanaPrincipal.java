@@ -488,7 +488,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonClientes, bordeProyectos, labelProyectos); 
         resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
-        PanelAlmacen frame = new PanelAlmacen(this.content);
+        PanelAlmacen frame = new PanelAlmacen(this.content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -506,7 +506,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonPlatos1, bordePlatos1, labelPlatos);
         
-        PanelClientes frame = new PanelClientes(this.content);
+        PanelClientes frame = new PanelClientes(this.content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -524,7 +524,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         resetColor(botonSalir, bordeSalir, labelSalir);
         resetColor(botonClientes, bordeProyectos, labelProyectos);
         
-        PanelPlatos frame = new PanelPlatos(this.content);
+        PanelPlatos frame = new PanelPlatos(this.content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();

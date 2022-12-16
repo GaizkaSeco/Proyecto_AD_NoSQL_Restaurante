@@ -6,6 +6,7 @@ package swing;
 
 import clases.ConexionExist;
 import clases.Producto;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.List;
@@ -20,13 +21,15 @@ public class PanelEditarProducto extends javax.swing.JPanel {
     JPanel content;
     int id;
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
     /**
      * Creates new form PanelEditarProducto
      */
-    public PanelEditarProducto(JPanel content, List<Producto> productos, int id) {
+    public PanelEditarProducto(JPanel content, List<Producto> productos, int id, Usuario user) {
         initComponents();
         this.content = content;
         this.id = id;
+        this.user = user;
 
         for (Producto producto : productos) {
             if (producto.getId() == id) {
@@ -139,7 +142,7 @@ public class PanelEditarProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
-        PanelAlmacen frame = new PanelAlmacen(content);
+        PanelAlmacen frame = new PanelAlmacen(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -157,7 +160,7 @@ public class PanelEditarProducto extends javax.swing.JPanel {
                 Producto updatePro = new Producto(id, nombreField.getText(), cantidad);
                 conexion.editarProducto(updatePro);
                 JOptionPane.showMessageDialog(null, "El producto se ha editado corectamente.");
-                PanelAlmacen frame = new PanelAlmacen(content);
+                PanelAlmacen frame = new PanelAlmacen(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

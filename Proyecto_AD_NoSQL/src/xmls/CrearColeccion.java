@@ -400,7 +400,6 @@ public class CrearColeccion {
                 col.storeResource(crearResource("empleados.xml", ".\\src\\xmls\\empleados.xml", col));
                 col.storeResource(crearResource("almacen.xml", ".\\src\\xmls\\almacen.xml", col));
                 col.storeResource(crearResource("clientes.xml", ".\\src\\xmls\\clientes.xml", col));
-                col.storeResource(crearResource("controlconsultas.xml", ".\\src\\xmls\\controlconsultas.xml", col));
                 col.storeResource(crearResource("login.xml", ".\\src\\xmls\\login.xml", col));
                 col.storeResource(crearResource("platos.xml", ".\\src\\xmls\\platos.xml", col));
                 col.storeResource(crearResource("usuarios.xml", ".\\src\\xmls\\usuarios.xml", col));

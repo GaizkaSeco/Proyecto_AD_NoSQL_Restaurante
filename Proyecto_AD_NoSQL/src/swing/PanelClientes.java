@@ -18,6 +18,7 @@ import javax.swing.table.TableRowSorter;
 import clases.Cliente;
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 import scrollbar.ScrollBarCustom;
 import table.TableHeader;
 
@@ -30,13 +31,15 @@ public class PanelClientes extends javax.swing.JPanel {
     ConexionExist conexion = new ConexionExist();
     List<Cliente> clientes = new ArrayList<Cliente>();
     TableRowSorter<DefaultTableModel> sorter;
+    Usuario user;
 
     /**
      * Creates new form PanelClientes
      */
-    public PanelClientes(JPanel content) {
+    public PanelClientes(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
 
         table1.setShowHorizontalLines(true);
         table1.setGridColor(new Color(230, 230, 230));
@@ -236,7 +239,7 @@ public class PanelClientes extends javax.swing.JPanel {
 
     private void anadirBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anadirBotonMousePressed
         cargarDatos();
-        PanelAnadirCliente frame = new PanelAnadirCliente(content);
+        PanelAnadirCliente frame = new PanelAnadirCliente(content, user);
         frame.setSize(830, 550);
         frame.setLocation(0, 0);
         content.removeAll();
@@ -252,7 +255,7 @@ public class PanelClientes extends javax.swing.JPanel {
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
             clientes.clear();
             clientes = conexion.cargarClientes();
-            PanelEditarCliente frame = new PanelEditarCliente(content, clientes, id);
+            PanelEditarCliente frame = new PanelEditarCliente(content, clientes, id, user);
             frame.setSize(830,550);
             frame.setLocation(0,0);
             content.removeAll();

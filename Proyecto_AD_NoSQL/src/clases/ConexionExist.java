@@ -27,6 +27,7 @@ public class ConexionExist {
 
     /**
      * Funcion encargada de conectarse a la bbdd
+     *
      * @return colleccion conectada a la bbdd
      */
     public static Collection conectar() {
@@ -49,7 +50,8 @@ public class ConexionExist {
 
     /**
      * Comprueba que los credenciales sean correctos
-     * @param usuario el nobre de usuario que se introduzca
+     *
+     * @param usuario    el nobre de usuario que se introduzca
      * @param contrasena la contrasena que se intoduzca
      * @return devuelve un objeto usuario con la informacion necesaria
      */
@@ -241,7 +243,7 @@ public class ConexionExist {
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
                 String sentencia = "update insert " + nuevoemp + " into /EMPLEADOS";
-                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(),sentencia));
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 registroCambios(user, sentencia);
@@ -255,7 +257,7 @@ public class ConexionExist {
         }
     }
 
-    public void anadirCliente(Cliente cliNuevo) {
+    public void anadirCliente(Cliente cliNuevo, Usuario user) {
         Collection col = conectar();
         String nuevocli = "<CLIENTE ID='" + cliNuevo.getId() + "'>" +
                 "<NOMBRE>" + cliNuevo.getNombre() + "</NOMBRE>" +
@@ -267,7 +269,9 @@ public class ConexionExist {
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
-                ResourceSet result = servicio.query("update insert " + nuevocli + " into /CLIENTES");
+                String sentencia = "update insert " + nuevocli + " into /CLIENTES";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
                 col.close();
@@ -279,7 +283,7 @@ public class ConexionExist {
         }
     }
 
-    public void anadirProducto(Producto proNuevo) {
+    public void anadirProducto(Producto proNuevo, Usuario user) {
         Collection col = conectar();
         String nuevopro = "<PRODUCTO ID='" + proNuevo.getId() + "'>" +
                 "<NOMBRE>" + proNuevo.getProducto() + "</NOMBRE>" +
@@ -290,7 +294,9 @@ public class ConexionExist {
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
-                ResourceSet result = servicio.query("update insert " + nuevopro + " into /ALMACEN");
+                String sentencia = "update insert " + nuevopro + " into /ALMACEN";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
                 col.close();
@@ -302,7 +308,7 @@ public class ConexionExist {
         }
     }
 
-    public void anadirPlato(Plato platoNuevo) {
+    public void anadirPlato(Plato platoNuevo, Usuario user) {
         Collection col = conectar();
         String nuevocli = "<PLATO ID='" + platoNuevo.getId() + "'>" +
                 "<NOMBRE>" + platoNuevo.getNombre() + "</NOMBRE>" +
@@ -315,7 +321,9 @@ public class ConexionExist {
                 XPathQueryService servicio;
                 servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Preparamos la consulta
-                ResourceSet result = servicio.query("update insert " + nuevocli + " into /PLATOS");
+                String sentencia = "update insert " + nuevocli + " into /PLATOS";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
                 //cerramos
                 col.close();
@@ -556,16 +564,37 @@ public class ConexionExist {
     }
 
     public void guardarConsulta(ControlConsultas controlConsultas) {
+        File file = new File(".\\src\\dats\\consultas.dat");
+        List<ControlConsultas> consultas = new ArrayList<>();
+        ObjectInputStream fileobjin = null;
         try {
-            File file = new File(".\\src\\dats\\consultas.dat");
-            FileOutputStream fileo = new FileOutputStream(file);
-            ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
-            fileobj.writeObject(controlConsultas);
-            fileobj.close();
+            FileInputStream filei = new FileInputStream(file);
+            fileobjin = new ObjectInputStream(filei);
+            ControlConsultas consulta;
+            while ((consulta = (ControlConsultas) fileobjin.readObject()) != null) {
+                consultas.add(consulta);
+            }
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de las consultas");
+        } catch (EOFException e) {
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "ERROR inesperado intentalo mas tarde.");
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido cargar los datos.");
+        }
+        try {
+            FileOutputStream fileo = new FileOutputStream(file);
+            ObjectOutputStream fileobj = new ObjectOutputStream(fileo);
+            System.out.println(consultas.size());
+            consultas.add(controlConsultas);
+            for (ControlConsultas value : consultas) {
+                fileobj.writeObject(value);
+            }
+            fileobj.close();
+            fileobjin.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

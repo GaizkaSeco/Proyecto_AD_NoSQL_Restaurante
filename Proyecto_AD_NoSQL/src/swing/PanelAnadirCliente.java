@@ -7,6 +7,7 @@ package swing;
 import clases.Cliente;
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.List;
@@ -20,12 +21,14 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
     JPanel content;
     List<Cliente> clientes;
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
     /**
      * Creates new form PanelAnadirCliente
      */
-    public PanelAnadirCliente(JPanel content) {
+    public PanelAnadirCliente(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
     }
 
     /**
@@ -141,7 +144,7 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBoton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBoton1MousePressed
-        PanelClientes frame = new PanelClientes(content);
+        PanelClientes frame = new PanelClientes(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -164,9 +167,9 @@ public class PanelAnadirCliente extends javax.swing.JPanel {
                     id = clientes.get(clientes.size() - 1).getId() + 1;
                 }
                 Cliente cliNuevo = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
-                conexion.anadirCliente(cliNuevo);
+                conexion.anadirCliente(cliNuevo, user);
                 JOptionPane.showMessageDialog(null, "El cliente se ha añadido corectamente.");
-                PanelClientes frame = new PanelClientes(content);
+                PanelClientes frame = new PanelClientes(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

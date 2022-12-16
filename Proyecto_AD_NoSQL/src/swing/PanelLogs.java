@@ -137,6 +137,7 @@ public class PanelLogs extends javax.swing.JPanel {
             while ((control = (ControlConsultas) fileobj.readObject()) != null) {
                 consultas.add(control);
             }
+            filein.close();
             fileobj.close();
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo de consultas.");
@@ -144,6 +145,7 @@ public class PanelLogs extends javax.swing.JPanel {
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "ERROR inesperado intentalo mas tarde.");
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar la clase paara crear el objeto.");
         }

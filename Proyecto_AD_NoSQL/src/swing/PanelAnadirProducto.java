@@ -7,6 +7,7 @@ package swing;
 import clases.ConexionExist;
 import clases.Empleado;
 import clases.Producto;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -21,13 +22,15 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
     JPanel content;
     List<Producto> productos = new ArrayList<>();
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
 
     /**
      * Creates new form PanelAnadirProducto
      */
-    public PanelAnadirProducto(JPanel content) {
+    public PanelAnadirProducto(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
     }
 
     /**
@@ -130,7 +133,7 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
-        PanelAlmacen frame = new PanelAlmacen(content);
+        PanelAlmacen frame = new PanelAlmacen(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -153,9 +156,9 @@ public class PanelAnadirProducto extends javax.swing.JPanel {
                     id = productos.get(productos.size() - 1).getId() + 1;
                 }
                 Producto proNuevo = new Producto(id, productoField.getText(), cantidad);
-                conexion.anadirProducto(proNuevo);
+                conexion.anadirProducto(proNuevo, user);
                 JOptionPane.showMessageDialog(null, "El producto se ha añadido corectamente.");
-                PanelAlmacen frame = new PanelAlmacen(content);
+                PanelAlmacen frame = new PanelAlmacen(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

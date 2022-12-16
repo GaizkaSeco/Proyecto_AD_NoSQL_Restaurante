@@ -7,6 +7,7 @@ package swing;
 import clases.ConexionExist;
 import clases.Empleado;
 import clases.Plato;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -21,12 +22,14 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
     JPanel content;
     List<Plato> platos = new ArrayList<>();
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
     /**
      * Creates new form PanelAnadirPlato
      */
-    public PanelAnadirPlato(JPanel content) {
+    public PanelAnadirPlato(JPanel content, Usuario user) {
         initComponents();
         this.content = content;
+        this.user = user;
         jComboBox1.addItem("Primero");
         jComboBox1.addItem("Segundo");
         jComboBox1.addItem("Tercero");
@@ -153,7 +156,7 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
-        PanelPlatos frame = new PanelPlatos(content);
+        PanelPlatos frame = new PanelPlatos(content, user);
         frame.setSize(830,550);
         frame.setLocation(0,0);
         content.removeAll();
@@ -177,9 +180,9 @@ public class PanelAnadirPlato extends javax.swing.JPanel {
                 }
                 int categoria = jComboBox1.getSelectedIndex() + 1;
                 Plato platoNuevo = new Plato(id, platoField.getText(),descripcionField.getText(), coste, categoria);
-                conexion.anadirPlato(platoNuevo);
+                conexion.anadirPlato(platoNuevo, user);
                 JOptionPane.showMessageDialog(null, "El plato se ha añadido corectamente.");
-                PanelPlatos frame = new PanelPlatos(content);
+                PanelPlatos frame = new PanelPlatos(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();

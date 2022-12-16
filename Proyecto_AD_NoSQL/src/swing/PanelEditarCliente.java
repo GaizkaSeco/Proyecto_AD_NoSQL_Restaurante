@@ -7,6 +7,7 @@ package swing;
 import clases.Cliente;
 import clases.ConexionExist;
 import clases.Empleado;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.util.List;
@@ -19,14 +20,16 @@ public class PanelEditarCliente extends javax.swing.JPanel {
     JPanel content;
     int id;
     ConexionExist conexion = new ConexionExist();
+    Usuario user;
 
     /**
      * Creates new form PanelEditarCliente
      */
-    public PanelEditarCliente(JPanel content, List<Cliente> clientes, int id) {
+    public PanelEditarCliente(JPanel content, List<Cliente> clientes, int id, Usuario user) {
         initComponents();
         this.content = content;
         this.id = id;
+        this.user = user;
 
         for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
@@ -154,7 +157,7 @@ public class PanelEditarCliente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBotonMousePressed
-        PanelClientes frame = new PanelClientes(content);
+        PanelClientes frame = new PanelClientes(content, user);
         frame.setSize(830, 550);
         frame.setLocation(0, 0);
         content.removeAll();
@@ -172,7 +175,7 @@ public class PanelEditarCliente extends javax.swing.JPanel {
                 Cliente updateCli = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
                 conexion.editarCliente(updateCli);
                 JOptionPane.showMessageDialog(null, "El cliente se ha editado corectamente.");
-                PanelClientes frame = new PanelClientes(content);
+                PanelClientes frame = new PanelClientes(content, user);
                 frame.setSize(830,550);
                 frame.setLocation(0,0);
                 content.removeAll();
