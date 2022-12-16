@@ -8,7 +8,6 @@ import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XPathQueryService;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -246,7 +245,6 @@ public class ConexionExist {
                 guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
                 ResourceSet result = servicio.query(sentencia);
                 System.out.println(result);
-                registroCambios(user, sentencia);
                 //cerramos
                 col.close();
             } catch (XMLDBException e) {
@@ -335,13 +333,14 @@ public class ConexionExist {
         }
     }
 
-    public void eliminarEmpleado(int id) {
+    public void eliminarEmpleado(int id, Usuario user) {
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                //Consulta para borrar un empleado --> update delete
-                servicio.query("update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']");
+                String sentencia = "update delete /EMPLEADOS/EMPLEADO[@ID='" + id + "']";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -351,13 +350,15 @@ public class ConexionExist {
         }
     }
 
-    public void eliminarPlato(int id) {
+    public void eliminarPlato(int id, Usuario user) {
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un plato --> update delete
-                servicio.query("update delete /PLATOS/PLATO[@ID='" + id + "']");
+                String sentencia = "update delete /PLATOS/PLATO[@ID='" + id + "']";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -367,13 +368,15 @@ public class ConexionExist {
         }
     }
 
-    public void eliminarCliente(int id) {
+    public void eliminarCliente(int id, Usuario user) {
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un cliente --> update delete
-                servicio.query("update delete /CLIENTES/CLIENTE[@ID='" + id + "']");
+                String sentencia = "update delete /CLIENTES/CLIENTE[@ID='" + id + "']";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -383,13 +386,15 @@ public class ConexionExist {
         }
     }
 
-    public void eliminarProducto(int id) {
+    public void eliminarProducto(int id, Usuario user) {
         Collection col = conectar();
         if (col != null) {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update delete
-                servicio.query("update delete /ALMACEN/PRODUCTO[@ID='" + id + "']");
+                String sentencia = "update delete /ALMACEN/PRODUCTO[@ID='" + id + "']";
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -399,7 +404,7 @@ public class ConexionExist {
         }
     }
 
-    public void editarEmpleado(Empleado empleado) {
+    public void editarEmpleado(Empleado empleado, Usuario user) {
         Collection col = conectar();
         String updateEmp = "<EMPLEADO ID='" + empleado.getId() + "'>" +
                 "<NOMBRE>" + empleado.getNombre() + "</NOMBRE>" +
@@ -412,7 +417,9 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
-                servicio.query("update replace /EMPLEADOS/EMPLEADO[@ID=" + empleado.getId() + "] with" + updateEmp);
+                String sentencia = "update replace /EMPLEADOS/EMPLEADO[@ID=" + empleado.getId() + "] with" + updateEmp;
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -422,7 +429,7 @@ public class ConexionExist {
         }
     }
 
-    public void editarProducto(Producto producto) {
+    public void editarProducto(Producto producto, Usuario user) {
         Collection col = conectar();
         String updatePro = "<PRODUCTO ID='" + producto.getId() + "'>" +
                 "<NOMBRE>" + producto.getProducto() + "</NOMBRE>" +
@@ -432,7 +439,9 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
-                servicio.query("update replace /ALMACEN/PRODUCTO[@ID=" + producto.getId() + "] with" + updatePro);
+                String sentencia = "update replace /ALMACEN/PRODUCTO[@ID=" + producto.getId() + "] with" + updatePro;
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -442,7 +451,7 @@ public class ConexionExist {
         }
     }
 
-    public void editarCliente(Cliente cliente) {
+    public void editarCliente(Cliente cliente, Usuario user) {
         Collection col = conectar();
         String updateCli = "<CLIENTE ID='" + cliente.getId() + "'>" +
                 "<NOMBRE>" + cliente.getNombre() + "</NOMBRE>" +
@@ -453,7 +462,9 @@ public class ConexionExist {
             try {
                 XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
                 //Consulta para borrar un producto --> update replace
-                servicio.query("update replace /CLIENTES/CLIENTE[@ID=" + cliente.getId() + "] with" + updateCli);
+                String sentencia = "update replace /CLIENTES/CLIENTE[@ID=" + cliente.getId() + "] with" + updateCli;
+                guardarConsulta(new ControlConsultas(user.getNombre(), new Date().toString(), sentencia));
+                servicio.query(sentencia);
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al borrar.");
@@ -486,39 +497,6 @@ public class ConexionExist {
 
                 //insertar el registro de login
                 servicio.query("update insert " + registro + " into /LOGINS");
-                col.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR en la conexion.");
-        }
-    }
-
-    public void registroCambios(Usuario user, String sentencia) {
-        Collection col = conectar();
-        if (col != null) {
-            try {
-                XPathQueryService servicio = (XPathQueryService) col.getService("XPathQueryService", "1.0");
-                //recuperar el id mas alto del registro para añadirle el siguiente
-                ResourceSet result = servicio.query("max(/REGISTROS/REGISTRO/ID) + 1");
-                // recorrer los datos del recurso.
-                int id = 0;
-                ResourceIterator i = result.getIterator();
-                while (i.hasMoreResources()) {
-                    Resource r = i.nextResource();
-                    id = Integer.parseInt(r.getContent().toString());
-                }
-                String registro = "<REGISTRO>" +
-                        "<ID>" + id + "</ID>" +
-                        "<IDUSUARIO>" + user.getId() + "</IDUSUARIO>" +
-                        "<USUARIO>" + user.getNombre() + "</USUARIO>" +
-                        "<FECHA>" + new Date() + "</FECHA>" +
-                        "<SENTENCIA>'" + sentencia + "'</SENTENCIA>" +
-                        "</REGISTRO>";
-
-                //insertar el registro de login
-                servicio.query("update insert " + registro + " into /REGISTROS");
                 col.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "ERROR al registrar los datos.");

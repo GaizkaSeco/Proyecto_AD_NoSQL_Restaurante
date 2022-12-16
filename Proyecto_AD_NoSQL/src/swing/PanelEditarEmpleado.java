@@ -202,7 +202,7 @@ public class PanelEditarEmpleado extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
                 Empleado updateEmp = new Empleado(id, nombreField.getText(),  salario, fechaField.getText(), telefono, emailField.getText());
-                conexion.editarEmpleado(updateEmp);
+                conexion.editarEmpleado(updateEmp, user);
                 JOptionPane.showMessageDialog(null, "El empleado se ha editado corectamente.");
                 PanelEmpleados frame = new PanelEmpleados(content, user);
                 frame.setSize(830,550);

@@ -270,7 +270,7 @@ public class PanelAlmacen extends javax.swing.JPanel {
         } else {
             //Obtencion del id del objeto seleccionaod en la tabla y lo eliminar
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
-            conexion.eliminarProducto(id);
+            conexion.eliminarProducto(id,user);
         }
         modificarTabla();
     }//GEN-LAST:event_eliminarBotonMousePressed

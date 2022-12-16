@@ -49,7 +49,7 @@
       <recent name="C:\Users\omega\Desktop\Repositorios\Proyecto_AD_NoSQL_Restaurante\Proyecto_AD_NoSQL\src\libreriasJars" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.VentanaPrincipal">
+  <component name="RunManager" selected="Application.CrearColeccion">
     <configuration name="CrearColeccion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="xmls.CrearColeccion" />
       <module name="Proyecto_AD_NoSQL" />
@@ -91,9 +91,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.VentanaPrincipal" />
         <item itemvalue="Application.CrearColeccion" />
         <item itemvalue="Application.VentanaLogin" />
+        <item itemvalue="Application.VentanaPrincipal" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +120,7 @@
       <workItem from="1671036287111" duration="4226000" />
       <workItem from="1671057755903" duration="676000" />
       <workItem from="1671125457494" duration="7812000" />
-      <workItem from="1671181553960" duration="5687000" />
+      <workItem from="1671181553960" duration="7696000" />
     </task>
     <servers />
   </component>
@@ -136,7 +136,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/clases/ConexionExist.java</url>
-          <line>260</line>
+          <line>258</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -226,7 +226,7 @@ public class PanelPlatos extends javax.swing.JPanel {
         } else {
             //Obtencion del id del objeto seleccionaod en la tabla
             int id = Integer.parseInt(table1.getValueAt(table1.getSelectedRow(), 0).toString());
-            conexion.eliminarPlato(id);
+            conexion.eliminarPlato(id, user);
         }
         modificarTabla();
     }//GEN-LAST:event_eliminarBotonMousePressed

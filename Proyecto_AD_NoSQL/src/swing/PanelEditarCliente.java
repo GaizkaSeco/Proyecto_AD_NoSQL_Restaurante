@@ -173,7 +173,7 @@ public class PanelEditarCliente extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
                 Cliente updateCli = new Cliente(id, nombreField.getText(), telefono, emailField.getText());
-                conexion.editarCliente(updateCli);
+                conexion.editarCliente(updateCli, user);
                 JOptionPane.showMessageDialog(null, "El cliente se ha editado corectamente.");
                 PanelClientes frame = new PanelClientes(content, user);
                 frame.setSize(830,550);

@@ -145,7 +145,6 @@ public class PanelLogs extends javax.swing.JPanel {
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "ERROR inesperado intentalo mas tarde.");
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar la clase paara crear el objeto.");
         }

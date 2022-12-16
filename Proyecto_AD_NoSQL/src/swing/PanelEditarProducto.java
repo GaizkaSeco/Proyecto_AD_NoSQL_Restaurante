@@ -158,7 +158,7 @@ public class PanelEditarProducto extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Compruebe que los datos son correctos");
             } else {
                 Producto updatePro = new Producto(id, nombreField.getText(), cantidad);
-                conexion.editarProducto(updatePro);
+                conexion.editarProducto(updatePro, user);
                 JOptionPane.showMessageDialog(null, "El producto se ha editado corectamente.");
                 PanelAlmacen frame = new PanelAlmacen(content, user);
                 frame.setSize(830,550);
